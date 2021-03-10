@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#875C99</color>
+    <color name="colorPrimaryDark">#83459E</color>
+    <color name="colorLogoText">#83459E</color>
+    <color name="colorTitulo">#545357</color>
+    <color name="colorDescricao">#716F75</color>
+    <color name="colorBotao">#D14793</color>
+</resources>

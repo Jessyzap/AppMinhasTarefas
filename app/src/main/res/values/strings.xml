@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Minhas Tarefas</string>
+    <string name="minhas">minhas</string>
+    <string name="Tarefas">Tarefas</string>
+    <string name="logotipo">LOGOTIPO</string>
+    <string name="tarefas_titulo">Tarefas</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>

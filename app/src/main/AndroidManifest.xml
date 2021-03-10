@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          package="com.ctt.minhastarefas">
+
+    <application
+            android:allowBackup="true"
+            android:icon="@mipmap/ic_launcher"
+            android:label="@string/app_name"
+            android:roundIcon="@mipmap/ic_launcher_round"
+            android:supportsRtl="true"
+            android:theme="@style/AppTheme">
+        <activity android:name=".PrincipalActivity">
+        </activity>
+        <activity android:name=".CarregandoTarefasFazerActivity">
+        </activity>
+        <activity android:name=".TarefasFeitasVaziaActivity">
+        </activity>
+        <activity android:name=".TarefasFazerVaziaActivity">
+        </activity>
+        <activity android:name=".TarefasCategoriaActivity">
+        </activity>
+        <activity android:name=".TarefasFeitasActivity">
+        </activity>
+        <activity android:name=".TarefasProgressoActivity">
+        </activity>
+        <activity android:name=".TarefasFazerActivity">
+        </activity>
+        <activity
+                android:name=".Splash"
+                android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>

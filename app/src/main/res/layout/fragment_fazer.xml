@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+        android:theme="@style/Theme.MaterialComponents"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".fragments.FazerFragment">
+
+        <androidx.recyclerview.widget.RecyclerView
+                android:background="#ECECEC"
+                android:id="@+id/rvListaFazer"
+                android:layout_height="match_parent"
+                android:layout_width="match_parent"
+                tools:listitem="@layout/item_tarefas_fazer"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+            android:id="@+id/btnAdicionar"
+            android:textSize="15sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="500dp"
+            android:layout_marginEnd="40dp"
+            android:layout_gravity="end"
+            android:text="Adicionar"
+            android:textColor="#FFFFFF"
+            app:iconTint="#FFFFFF"
+            app:iconSize="18dp"
+            android:backgroundTint="@color/colorBotao"
+            app:icon="@drawable/ic_adicionar"/>
+</FrameLayout>
