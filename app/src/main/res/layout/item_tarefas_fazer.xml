@@ -5,8 +5,7 @@
         android:layout_width="match_parent"
         android:layout_height="80dp"
         android:layout_marginTop="5dp"
-        android:background="@drawable/shape_button"
-        android:backgroundTint="#FFFFFF">
+        android:background="#FFFFFF">
 
     <TextView
             android:id="@+id/txtTarefaFazer"

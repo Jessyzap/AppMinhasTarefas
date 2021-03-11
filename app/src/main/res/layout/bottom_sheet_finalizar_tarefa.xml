@@ -50,17 +50,17 @@
                 android:layout_height="wrap_content"
                 android:text="Em progresso"
                 android:layout_marginTop="70dp"
-                android:textSize="18sp"/>
+                android:textSize="16sp"/>
     </FrameLayout>
 
     <TextView
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:text="Preciso estudar alguns conceitos como herança..."
+            android:text="Preciso estudar alguns conceitos como herança......."
             android:maxLines="20"
-            android:textSize="18sp"
+            android:textSize="16sp"
             android:backgroundTint="#ECECEC"
-            android:layout_marginTop="34dp"/>
+            android:layout_marginTop="20dp"/>
 
     <LinearLayout
             android:layout_width="match_parent"
@@ -75,14 +75,14 @@
                 android:gravity="center_horizontal">
 
             <ImageView
-                    android:layout_marginTop="253dp"
+                    android:layout_marginTop="218dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_excluir"/>
             <TextView
-                    android:textSize="18sp"
+                    android:textSize="16sp"
                     android:layout_marginStart="10dp"
-                    android:layout_marginTop="250dp"
+                    android:layout_marginTop="215dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:clickable="true"
@@ -94,12 +94,17 @@
 
         <Button
                 android:layout_marginTop="25dp"
-                android:textSize="15sp"
+                android:textSize="16sp"
                 android:textColor="#FFFFFF"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/shape_button_bottom_sheet"
                 android:text="Finalizar tarefa"/>
+
+        <ImageView
+                android:layout_width="100dp"
+                android:layout_height="50dp"/>
     </LinearLayout>
+
 
 </LinearLayout>

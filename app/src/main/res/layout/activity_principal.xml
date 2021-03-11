@@ -3,22 +3,23 @@
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:theme="@style/Theme.MaterialComponents"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".PrincipalActivity">
 
-    <androidx.viewpager.widget.ViewPager
-            android:id="@+id/viewPager"
-            android:layout_width="match_parent"
-            android:layout_height="585dp"
-            app:layout_constraintBottom_toBottomOf="parent"/>
+      <androidx.viewpager.widget.ViewPager
+              android:id="@+id/viewPager"
+              android:layout_width="match_parent"
+              android:layout_height="585dp"
+              app:layout_constraintBottom_toBottomOf="parent"/>
+
 
     <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="146dp"
+            android:layout_height="match_parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="@+id/viewPager"
             android:orientation="vertical"
             android:id="@+id/linearLayout"
             app:layout_constraintVertical_bias="0.0">
@@ -31,6 +32,12 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 android:id="@+id/imgShape"/>
+
+        <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="100dp">
+        </LinearLayout>
 
         <TextView
                 android:fontFamily="sans-serif"
@@ -52,6 +59,7 @@
                 android:gravity="center_horizontal"
                 android:paddingHorizontal="8dp">
 
+
             <com.google.android.material.tabs.TabLayout
                     android:id="@+id/tabLayout"
                     android:layout_width="match_parent"
@@ -67,6 +75,20 @@
                     app:layout_constraintTop_toTopOf="parent"/>
         </LinearLayout>
 
+        <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+                android:id="@+id/btnAdicionar"
+                android:textSize="15sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="515dp"
+                android:layout_marginEnd="40dp"
+                android:layout_gravity="end"
+                android:text="Adicionar"
+                android:textColor="#FFFFFF"
+                app:iconTint="#FFFFFF"
+                app:iconSize="18dp"
+                android:backgroundTint="@color/colorBotao"
+                app:icon="@drawable/ic_adicionar"/>
     </FrameLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -5,6 +5,7 @@
         android:background="@drawable/shape_bottom_sheet"
         android:paddingHorizontal="20dp"
         android:layout_width="match_parent"
+        android:id="@+id/layoutCriar"
         android:layout_height="match_parent">
 
     <ImageView
@@ -29,25 +30,27 @@
             android:layout_height="wrap_content"
             android:text="Adicione uma tarefa que ainda será feita"
             android:layout_marginTop="5dp"
-            android:textSize="18sp"/>
+            android:textSize="16sp"/>
 
     <EditText
+            android:id="@+id/txtTituloCriarTarefa"
             android:paddingStart="10dp"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:hint="Título da tarefa"
-            android:textSize="18sp"
+            android:textSize="16sp"
             android:background="@drawable/shape_retangular"
             android:backgroundTint="#ECECEC"
-            android:layout_marginTop="40dp"/>
+            android:layout_marginTop="30dp"/>
 
     <EditText
-            android:paddingBottom="150dp"
+            android:id="@+id/txtDescricaoCriarTarefa"
+            android:paddingBottom="105dp"
             android:paddingStart="10dp"
             android:layout_width="match_parent"
-            android:layout_height="200dp"
+            android:layout_height="150dp"
             android:hint="Descrição da tarefa"
-            android:textSize="18sp"
+            android:textSize="16sp"
             android:maxLines="20"
             android:background="@drawable/shape_retangular"
             android:layout_marginTop="20dp"/>
@@ -57,15 +60,20 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="opcional"
-            android:textSize="18sp"
+            android:textSize="12sp"
             android:layout_marginTop="5dp"/>
 
     <Button
-            android:textSize="15sp"
+            android:id="@+id/btnCriarTarefa"
+            android:textSize="16sp"
             android:textColor="#FFFFFF"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="70dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/shape_button_bottom_sheet"
             android:text="Criar tarefa"/>
+
+    <ImageView
+            android:layout_width="100dp"
+            android:layout_height="50dp"/>
 </LinearLayout>

@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.ctt.minhastarefas.R
-import com.ctt.minhastarefas.adapterListas.TarefasFazerAdapter
+import com.ctt.minhastarefas.adapterListas.TarefasFeitasAdapter
 import com.ctt.minhastarefas.model.Tarefa
 
 class FeitasFragment : Fragment() {
@@ -41,7 +41,7 @@ class FeitasFragment : Fragment() {
         )
 
         val rvFeitas = view.findViewById<RecyclerView>(R.id.rvListaFeitas)
-        val adapterTarefasFeitas = TarefasFazerAdapter(listaTarefasFeitas)
+        val adapterTarefasFeitas = TarefasFeitasAdapter(listaTarefasFeitas)
         rvFeitas.adapter = adapterTarefasFeitas
         rvFeitas.layoutManager = LinearLayoutManager(context)
     }

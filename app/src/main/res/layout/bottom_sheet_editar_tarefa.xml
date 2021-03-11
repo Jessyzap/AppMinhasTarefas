@@ -50,7 +50,7 @@
                 android:layout_height="wrap_content"
                 android:text="Altere  uma tarefa existente"
                 android:layout_marginTop="70dp"
-                android:textSize="18sp"/>
+                android:textSize="16sp"/>
     </FrameLayout>
 
 
@@ -59,18 +59,18 @@
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:hint="Título da tarefa"
-            android:textSize="18sp"
+            android:textSize="16sp"
             android:background="@drawable/shape_retangular"
             android:backgroundTint="#ECECEC"
-            android:layout_marginTop="34dp"/>
+            android:layout_marginTop="20dp"/>
 
     <EditText
-            android:paddingBottom="150dp"
+            android:paddingBottom="105dp"
             android:paddingStart="10dp"
             android:layout_width="match_parent"
-            android:layout_height="200dp"
+            android:layout_height="150dp"
             android:hint="Descrição da tarefa"
-            android:textSize="18sp"
+            android:textSize="16sp"
             android:maxLines="20"
             android:background="@drawable/shape_retangular"
             android:layout_marginTop="20dp"/>
@@ -80,15 +80,19 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="opcional"
-            android:textSize="18sp"
+            android:textSize="12sp"
             android:layout_marginTop="5dp"/>
 
     <Button
-            android:textSize="15sp"
+            android:textSize="16sp"
             android:textColor="#FFFFFF"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="70dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/shape_button_bottom_sheet"
             android:text="Salvar"/>
+
+    <ImageView
+            android:layout_width="100dp"
+            android:layout_height="50dp"/>
 </LinearLayout>

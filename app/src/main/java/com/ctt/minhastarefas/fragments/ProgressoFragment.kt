@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.ctt.minhastarefas.R
-import com.ctt.minhastarefas.adapterListas.TarefasFazerAdapter
+import com.ctt.minhastarefas.adapterListas.TarefasProgressoAdapter
 import com.ctt.minhastarefas.model.Tarefa
 
 class ProgressoFragment : Fragment() {
@@ -41,7 +41,7 @@ class ProgressoFragment : Fragment() {
         )
 
         val rvProgresso = view.findViewById<RecyclerView>(R.id.rvListaProgresso)
-        val adapterTarefasProgresso = TarefasFazerAdapter(listaTarefasProgresso)
+        val adapterTarefasProgresso = TarefasProgressoAdapter(listaTarefasProgresso)
         rvProgresso.adapter = adapterTarefasProgresso
         rvProgresso.layoutManager = LinearLayoutManager(context)
     }
