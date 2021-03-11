@@ -10,9 +10,9 @@ import com.google.android.material.button.MaterialButton
 import com.google.android.material.tabs.TabLayout
 import kotlinx.android.synthetic.main.fragment_fazer.*
 
-//CriarTarefaBottomSheet.FragmentListener
 
 class PrincipalActivity : AppCompatActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         supportActionBar?.hide()
         super.onCreate(savedInstanceState)
