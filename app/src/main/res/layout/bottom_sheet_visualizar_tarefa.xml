@@ -2,10 +2,10 @@
 <LinearLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:orientation="vertical"
-        android:background="@drawable/shape_bottom_sheet"
         android:paddingHorizontal="20dp"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        style="@style/AppModalStyle">
 
     <ImageView
             android:layout_marginTop="10dp"
@@ -20,14 +20,16 @@
             android:orientation="horizontal">
 
         <ImageView
-
+                android:clickable="true"
+                android:id="@+id/imgEditar"
                 android:maxHeight="20dp"
                 android:maxWidth="20dp"
                 android:layout_width="30dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="55dp"
                 android:layout_marginStart="280dp"
-                android:src="@drawable/ic_editar"/>
+                android:src="@drawable/ic_editar"
+                android:focusable="true"/>
 
         <ImageView
                 android:layout_width="28dp"
@@ -37,6 +39,7 @@
                 android:src="@drawable/ic_linha_vertical"/>
 
         <TextView
+                android:id="@+id/txtTituloVisualizar"
                 android:textColor="@color/colorTitulo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -55,6 +58,7 @@
     </FrameLayout>
 
     <TextView
+            android:id="@+id/txtDescricaoVisualizar"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:text="Preciso estudar alguns conceitos como herança..."
@@ -94,6 +98,7 @@
         </LinearLayout>
 
         <Button
+                android:id="@+id/btnIniciarTarefa"
                 android:layout_marginTop="25dp"
                 android:textSize="16sp"
                 android:textColor="#FFFFFF"

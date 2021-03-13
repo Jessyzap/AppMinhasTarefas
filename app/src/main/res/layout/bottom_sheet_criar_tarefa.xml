@@ -2,11 +2,11 @@
 <LinearLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:orientation="vertical"
-        android:background="@drawable/shape_bottom_sheet"
         android:paddingHorizontal="20dp"
         android:layout_width="match_parent"
         android:id="@+id/layoutCriar"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        style="@style/AppModalStyle">
 
     <ImageView
             android:layout_marginTop="10dp"

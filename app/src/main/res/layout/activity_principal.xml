@@ -14,7 +14,6 @@
               android:layout_height="585dp"
               app:layout_constraintBottom_toBottomOf="parent"/>
 
-
     <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -74,7 +73,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"/>
         </LinearLayout>
-
+        <!--
         <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
                 android:id="@+id/btnAdicionar"
                 android:textSize="15sp"
@@ -89,6 +88,7 @@
                 app:iconSize="18dp"
                 android:backgroundTint="@color/colorBotao"
                 app:icon="@drawable/ic_adicionar"/>
+                -->
     </FrameLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -5,9 +5,9 @@ import androidx.lifecycle.ViewModel
 
 class msgViewModel : ViewModel() {
 
-    val listaDados = MutableLiveData<MutableList<Tarefa>>()
+    val dados = MutableLiveData<Tarefa>()
 
-    fun dadosTarefa(dados: MutableList<Tarefa>) {
-        listaDados.value = dados
+    fun dadosTarefa(dadosTarefa: Tarefa) {
+        dados.value = dadosTarefa
     }
 }

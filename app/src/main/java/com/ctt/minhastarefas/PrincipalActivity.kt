@@ -2,13 +2,8 @@ package com.ctt.minhastarefas
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
-import android.widget.Button
 import androidx.viewpager.widget.ViewPager
-import com.ctt.minhastarefas.bottomSheets.CriarTarefaBottomSheet
-import com.google.android.material.button.MaterialButton
 import com.google.android.material.tabs.TabLayout
-import kotlinx.android.synthetic.main.fragment_fazer.*
 
 
 class PrincipalActivity : AppCompatActivity() {
@@ -23,13 +18,11 @@ class PrincipalActivity : AppCompatActivity() {
 
         viewPager.adapter = PagerAdapter(supportFragmentManager)
         tabLayout.setupWithViewPager(viewPager)
+    }
 
-        val botao = findViewById<Button?>(R.id.btnAdicionar)
-
-        botao?.setOnClickListener {
-            CriarTarefaBottomSheet().apply {
-                show(supportFragmentManager, CriarTarefaBottomSheet.TAG)
-            }
-        }
+    override fun onBackPressed() {
+        //Toast.makeText(this, "Tchauuuu", Toast.LENGTH_SHORT)
+        SaidaActivity()
+        super.onBackPressed()
     }
 }
