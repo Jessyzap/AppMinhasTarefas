@@ -80,6 +80,7 @@
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_excluir"/>
             <TextView
+                    android:id="@+id/btnExcluirTarefa"
                     android:textSize="16sp"
                     android:layout_marginStart="10dp"
                     android:layout_marginTop="292dp"

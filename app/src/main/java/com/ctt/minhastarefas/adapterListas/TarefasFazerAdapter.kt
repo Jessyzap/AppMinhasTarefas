@@ -18,7 +18,6 @@ class TarefasFazerAdapter(private val listaTarefasFazer: MutableList<Tarefa>, pr
     RecyclerView.Adapter<TarefasFazerAdapter.TarefaHolder>() {
 
 
-
     private var model: msgViewModel? = null
 
     class TarefaHolder(view: View) : RecyclerView.ViewHolder(view) {

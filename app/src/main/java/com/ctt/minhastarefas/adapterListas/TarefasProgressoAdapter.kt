@@ -1,14 +1,18 @@
 package com.ctt.minhastarefas.adapterListas
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.ctt.minhastarefas.R
+import com.ctt.minhastarefas.bottomSheets.ProgressoTarefaBottomSheet
+import com.ctt.minhastarefas.bottomSheets.VisualizarTarefaBottomSheet
 import com.ctt.minhastarefas.model.Tarefa
 
-class TarefasProgressoAdapter(private val listaTarefasProgresso: MutableList<Tarefa>) :
+class TarefasProgressoAdapter(private val listaTarefasProgresso: MutableList<Tarefa>, private val contexto: Context) :
     RecyclerView.Adapter<TarefasProgressoAdapter.TarefaProgressoHolder>() {
 
     private val listaTarefasProgressoRemover = mutableListOf<Tarefa>()
@@ -28,7 +32,14 @@ class TarefasProgressoAdapter(private val listaTarefasProgresso: MutableList<Tar
 
         holder.nome.text = listaTarefasProgresso[position].nomeTarefa
         holder.descricao.text = listaTarefasProgresso[position].descricaoTarefa
+        holder.itemView.setOnClickListener {
+
+            val bottomSheetProgresso = ProgressoTarefaBottomSheet()
+            bottomSheetProgresso.show((contexto as AppCompatActivity).supportFragmentManager, "BottomSheetProgresso")
+
+        }
     }
+
 
     override fun getItemCount(): Int = listaTarefasProgresso.size
 
@@ -36,11 +47,12 @@ class TarefasProgressoAdapter(private val listaTarefasProgresso: MutableList<Tar
         listaTarefasProgresso.add(tarefa)
         notifyDataSetChanged()
     }
+//
+//    fun removerTarefa() {
+//        listaTarefasProgresso.removeAll(listaTarefasProgressoRemover)
+//        notifyDataSetChanged()
+//        //ListaTarefasActivity.listaCompanion.removeAll(listaTarefasFazerRemover)
+//        listaTarefasProgressoRemover.clear()
+//    }
 
-    fun removerTarefa() {
-        listaTarefasProgresso.removeAll(listaTarefasProgressoRemover)
-        notifyDataSetChanged()
-        //ListaTarefasActivity.listaCompanion.removeAll(listaTarefasFazerRemover)
-        listaTarefasProgressoRemover.clear()
-    }
 }

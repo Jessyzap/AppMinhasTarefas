@@ -56,12 +56,12 @@ class FazerFragment : Fragment() {
 //                    descricaoTarefa = t.descricaoTarefa
 //                    listaTarefasFazer.add(Tarefa(tituloTarefa, descricaoTarefa))
 //                })
-
-            val rvFazer = view.findViewById<RecyclerView>(R.id.rvListaFazer)
-            val adapterTarefasFazer = TarefasFazerAdapter(listaTarefasFazer, activity!!)
-            rvFazer.adapter = adapterTarefasFazer
-            rvFazer.layoutManager = LinearLayoutManager(context)
         }
+
+        val rvFazer = view.findViewById<RecyclerView>(R.id.rvListaFazer)
+        val adapterTarefasFazer = TarefasFazerAdapter(listaTarefasFazer, activity!!)
+        rvFazer.adapter = adapterTarefasFazer
+        rvFazer.layoutManager = LinearLayoutManager(context)
     }
 
     companion object {

@@ -24,25 +24,29 @@ class FeitasFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val listaTarefasFeitas = mutableListOf(
-            Tarefa("A", "A"),
-            Tarefa("A", "A"),
-            Tarefa("A", "A"),
-            Tarefa("A", "A"),
-            Tarefa("A", "A"),
-            Tarefa("A", "A"),
-            Tarefa("A", "A"),
-            Tarefa("A", "A"),
-            Tarefa("A", "A"),
-            Tarefa("A", "A"),
-            Tarefa("A", "A"),
-            Tarefa("A", "A"),
-            Tarefa("A", "A")
-        )
+//        val listaTarefasFeitas = mutableListOf(
+//            Tarefa("A", "A"),
+//            Tarefa("A", "A"),
+//            Tarefa("A", "A"),
+//            Tarefa("A", "A"),
+//            Tarefa("A", "A"),
+//            Tarefa("A", "A"),
+//            Tarefa("A", "A"),
+//            Tarefa("A", "A"),
+//            Tarefa("A", "A"),
+//            Tarefa("A", "A"),
+//            Tarefa("A", "A"),
+//            Tarefa("A", "A"),
+//            Tarefa("A", "A")
+//        )
 
         val rvFeitas = view.findViewById<RecyclerView>(R.id.rvListaFeitas)
-        val adapterTarefasFeitas = TarefasFeitasAdapter(listaTarefasFeitas)
+        val adapterTarefasFeitas = TarefasFeitasAdapter(listaTarefasFeitas,activity!!)
         rvFeitas.adapter = adapterTarefasFeitas
         rvFeitas.layoutManager = LinearLayoutManager(context)
+    }
+
+    companion object {
+        val listaTarefasFeitas = mutableListOf<Tarefa>()
     }
 }

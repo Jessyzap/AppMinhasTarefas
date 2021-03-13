@@ -24,25 +24,29 @@ class ProgressoFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val listaTarefasProgresso = mutableListOf(
-            Tarefa("A", "A"),
-            Tarefa("A", "A"),
-            Tarefa("A", "A"),
-            Tarefa("A", "A"),
-            Tarefa("A", "A"),
-            Tarefa("A", "A"),
-            Tarefa("A", "A"),
-            Tarefa("A", "A"),
-            Tarefa("A", "A"),
-            Tarefa("A", "A"),
-            Tarefa("A", "A"),
-            Tarefa("A", "A"),
-            Tarefa("A", "A")
-        )
+//        val listaTarefasProgresso = mutableListOf(
+//            Tarefa("A", "A"),
+//            Tarefa("A", "A"),
+//            Tarefa("A", "A"),
+//            Tarefa("A", "A"),
+//            Tarefa("A", "A"),
+//            Tarefa("A", "A"),
+//            Tarefa("A", "A"),
+//            Tarefa("A", "A"),
+//            Tarefa("A", "A"),
+//            Tarefa("A", "A"),
+//            Tarefa("A", "A"),
+//            Tarefa("A", "A"),
+//            Tarefa("A", "A")
+//        )
 
         val rvProgresso = view.findViewById<RecyclerView>(R.id.rvListaProgresso)
-        val adapterTarefasProgresso = TarefasProgressoAdapter(listaTarefasProgresso)
+        val adapterTarefasProgresso = TarefasProgressoAdapter(listaTarefasProgresso,activity!!)
         rvProgresso.adapter = adapterTarefasProgresso
         rvProgresso.layoutManager = LinearLayoutManager(context)
+    }
+
+    companion object {
+        val listaTarefasProgresso = mutableListOf<Tarefa>()
     }
 }

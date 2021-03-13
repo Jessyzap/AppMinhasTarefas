@@ -12,31 +12,27 @@ import android.widget.Toast
 import androidx.lifecycle.ViewModelProviders
 import com.ctt.minhastarefas.R
 import com.ctt.minhastarefas.fragments.FazerFragment
+import com.ctt.minhastarefas.fragments.FeitasFragment.Companion.listaTarefasFeitas
 import com.ctt.minhastarefas.fragments.ProgressoFragment
 import com.ctt.minhastarefas.fragments.ProgressoFragment.Companion.listaTarefasProgresso
 import com.ctt.minhastarefas.model.Tarefa
 import com.ctt.minhastarefas.model.msgViewModel
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
-class VisualizarTarefaBottomSheet() : BottomSheetDialogFragment() {
+class ProgressoTarefaBottomSheet() : BottomSheetDialogFragment() {
 
-    private lateinit var botaoIniciar: Button
+    private lateinit var botaoFinalizar: Button
 
     companion object {
-        const val TAG = "VisualizarTarefaBottomSheet"
+        const val TAG = "FinalizarTarefaBottomSheet"
     }
-
-    //Editar tarefa
-    //Excluir tarefa
-    //Iniciar tarefa  val botaoIniciarTarefa = view.findViewById<Button>(R.id.btnIniciarTarefa)
-
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
-        val contextoVisualizar = inflater.inflate(R.layout.bottom_sheet_visualizar_tarefa, container, false)
-        botaoIniciar = contextoVisualizar.findViewById(R.id.btnIniciarTarefa)
+        val contextoFinalizar = inflater.inflate(R.layout.bottom_sheet_finalizar_tarefa, container, false)
+        botaoFinalizar = contextoFinalizar.findViewById(R.id.btnFinalizarTarefa)
 
-        return contextoVisualizar
+        return contextoFinalizar
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -44,12 +40,8 @@ class VisualizarTarefaBottomSheet() : BottomSheetDialogFragment() {
 
         val model = ViewModelProviders.of(activity!!).get(msgViewModel::class.java)
 
-//        val btnIniciarTarefa = view.findViewById<TextView>(R.id.btnIniciarTarefa)
-//        val btnEditarTarefa = view.findViewById<TextView>(R.id.imgEditar)
-//        val btnTeste = view.findViewById<TextView>(R.id.imgEditar)
-
-        val tituloTarefa = view.findViewById<TextView>(R.id.txtTituloVisualizar)
-        val descricaoTarefa = view.findViewById<TextView>(R.id.txtDescricaoVisualizar)
+        val tituloTarefa = view.findViewById<TextView>(R.id.txtTituloProgresso)
+        val descricaoTarefa = view.findViewById<TextView>(R.id.txtDescricaoProgresso)
 
         // colocar position(adapter e afins)
         model.dados.observe(viewLifecycleOwner,
@@ -58,13 +50,13 @@ class VisualizarTarefaBottomSheet() : BottomSheetDialogFragment() {
                 descricaoTarefa.text = t.descricaoTarefa
             })
 
-        // adicionar na lista progresso
-        botaoIniciar.setOnClickListener {
+        // adicionar na lista feitas
+        botaoFinalizar.setOnClickListener {
             Toast.makeText(context, "vc clicou", Toast.LENGTH_SHORT).show()
             //model!!.dadosTarefa(Tarefa(tituloTarefa.toString(),descricaoTarefa.toString()))
 
-            listaTarefasProgresso.add(Tarefa(tituloTarefa.text as String,descricaoTarefa.text as String))
-          //ProgressoFragment.listaTarefasProgresso.add(Tarefa("oi","teste oi"))
+            listaTarefasFeitas.add(Tarefa(tituloTarefa.text as String,descricaoTarefa.text as String))
+            //ProgressoFragment.listaTarefasProgresso.add(Tarefa("oi","teste oi"))
         }
     }
 }

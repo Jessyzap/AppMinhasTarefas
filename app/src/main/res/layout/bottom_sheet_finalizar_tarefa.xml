@@ -36,6 +36,7 @@
                 android:src="@drawable/ic_linha_vertical"/>
 
         <TextView
+                android:id="@+id/txtTituloProgresso"
                 android:textColor="@color/colorTitulo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -54,6 +55,7 @@
     </FrameLayout>
 
     <TextView
+            android:id="@+id/txtDescricaoProgresso"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:text="Preciso estudar alguns conceitos como herança......."
@@ -93,6 +95,7 @@
         </LinearLayout>
 
         <Button
+                android:id="@+id/btnFinalizarTarefa"
                 android:layout_marginTop="25dp"
                 android:textSize="16sp"
                 android:textColor="#FFFFFF"
