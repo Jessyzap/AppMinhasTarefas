@@ -20,30 +20,38 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
 class FinalizadaTarefaBottomSheet() : BottomSheetDialogFragment() {
 
-    private lateinit var botaoExcluir: Button
+    private lateinit var botaoExcluir: TextView
 
     companion object {
         const val TAG = "FinalizadaTarefaBottomSheet"
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setStyle(BottomSheetDialogFragment.STYLE_NORMAL, R.style.MyBottomSheetDialogTheme)
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
         val contextoFinalizada = inflater.inflate(R.layout.bottom_sheet_tarefa_finalizada, container, false)
         botaoExcluir = contextoFinalizada.findViewById(R.id.btnExcluirTarefa)
-
         return contextoFinalizada
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val model = ViewModelProviders.of(activity!!).get(msgViewModel::class.java)
+        val tituloTarefa = view.findViewById<TextView>(R.id.txtTituloExcluir)
+        val descricaoTarefa = view.findViewById<TextView>(R.id.txtDescricaoExcluir)
 
-        // excluir
+        val tituloTarefaRecebido = getArguments()?.getString("TITULO")
+        val descricaoTarefaRecebida = getArguments()?.getString("DESCRICAO")
+
+        tituloTarefa.text = tituloTarefaRecebido
+        descricaoTarefa.text = descricaoTarefaRecebida
+
+
         botaoExcluir.setOnClickListener {
-            Toast.makeText(context, "vc clicou", Toast.LENGTH_SHORT).show()
-            //model!!.dadosTarefa(Tarefa(tituloTarefa.toString(),descricaoTarefa.toString()))
 
         }
     }

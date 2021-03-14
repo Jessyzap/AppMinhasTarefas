@@ -11,7 +11,7 @@
             android:theme="@style/AppTheme">
         <activity android:name=".bottomSheets.TesteActivity">
         </activity>
-        <activity android:name=".PrincipalActivity">
+        <activity android:name=".ui.PrincipalActivity">
         </activity>
         <activity android:name=".CarregandoTarefasFazerActivity">
         </activity>
@@ -28,7 +28,7 @@
         <activity android:name=".TarefasFazerActivity">
         </activity>
         <activity
-                android:name=".Splash"
+                android:name=".ui.Splash"
                 android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>

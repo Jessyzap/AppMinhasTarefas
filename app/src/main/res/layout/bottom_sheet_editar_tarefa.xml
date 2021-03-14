@@ -19,12 +19,15 @@
                  android:orientation="horizontal">
 
         <ImageView
+                android:id="@+id/imgVoltar"
+                android:clickable="true"
                 android:maxHeight="20dp"
                 android:maxWidth="20dp"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_marginTop="55dp"
-                android:src="@drawable/ic_seta_esquerda"/>
+                android:src="@drawable/ic_seta_esquerda"
+                android:focusable="true"/>
         <ImageView
 
                 android:layout_width="28dp"

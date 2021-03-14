@@ -1,6 +1,7 @@
 package com.ctt.minhastarefas.adapterListas
 
 import android.content.Context
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,8 +9,8 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.ctt.minhastarefas.R
-import com.ctt.minhastarefas.bottomSheets.ProgressoTarefaBottomSheet
-import com.ctt.minhastarefas.bottomSheets.VisualizarTarefaBottomSheet
+import com.ctt.minhastarefas.bottomSheets.FinalizadaTarefaBottomSheet
+import com.ctt.minhastarefas.bottomSheets.FinalizarTarefaBottomSheet
 import com.ctt.minhastarefas.model.Tarefa
 
 class TarefasProgressoAdapter(private val listaTarefasProgresso: MutableList<Tarefa>, private val contexto: Context) :
@@ -34,7 +35,11 @@ class TarefasProgressoAdapter(private val listaTarefasProgresso: MutableList<Tar
         holder.descricao.text = listaTarefasProgresso[position].descricaoTarefa
         holder.itemView.setOnClickListener {
 
-            val bottomSheetProgresso = ProgressoTarefaBottomSheet()
+            val bottomSheetProgresso = FinalizarTarefaBottomSheet()
+            val bundle = Bundle()
+            bundle.putString("TITULO", listaTarefasProgresso[position].nomeTarefa)
+            bundle.putString("DESCRICAO", listaTarefasProgresso[position].descricaoTarefa)
+            bottomSheetProgresso.setArguments(bundle)
             bottomSheetProgresso.show((contexto as AppCompatActivity).supportFragmentManager, "BottomSheetProgresso")
 
         }

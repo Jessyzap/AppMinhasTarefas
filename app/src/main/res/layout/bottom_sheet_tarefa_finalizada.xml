@@ -36,6 +36,7 @@
                 android:src="@drawable/ic_linha_vertical"/>
 
         <TextView
+                android:id="@+id/txtTituloExcluir"
                 android:textColor="@color/colorTitulo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -54,6 +55,7 @@
     </FrameLayout>
 
     <TextView
+            android:id="@+id/txtDescricaoExcluir"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:text="Preciso estudar alguns conceitos como herança........."
@@ -80,6 +82,7 @@
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_excluir"/>
             <TextView
+                    android:onClick="onClick"
                     android:id="@+id/btnExcluirTarefa"
                     android:textSize="16sp"
                     android:layout_marginStart="10dp"

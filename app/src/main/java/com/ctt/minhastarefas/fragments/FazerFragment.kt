@@ -6,14 +6,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
-import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.ctt.minhastarefas.R
 import com.ctt.minhastarefas.adapterListas.TarefasFazerAdapter
 import com.ctt.minhastarefas.bottomSheets.CriarTarefaBottomSheet
 import com.ctt.minhastarefas.model.Tarefa
-import com.ctt.minhastarefas.model.msgViewModel
 
 
 class FazerFragment : Fragment() {
@@ -34,19 +32,16 @@ class FazerFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val model = ViewModelProviders.of(activity!!).get(msgViewModel::class.java)
+       // val model = ViewModelProviders.of(activity!!).get(msgViewModel::class.java)
 
-        var tituloTarefa: String
-        var descricaoTarefa: String
+//        var tituloTarefa: String
+//        var descricaoTarefa: String
 
 
         val bottomSheetCriar = CriarTarefaBottomSheet()
-        //BottomSheetBehavior.STATE_EXPANDED
-
 
         botao.setOnClickListener {
 
-            //Toast.makeText(context, "clicou", Toast.LENGTH_SHORT).show()
             fragmentManager?.let { it1 -> bottomSheetCriar.show(it1, "CriarTarefaBottomSheet")
             }
 

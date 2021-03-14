@@ -1,6 +1,9 @@
 package com.ctt.minhastarefas.bottomSheets
 
 import android.app.Dialog
+import android.content.res.ColorStateList
+import android.graphics.Color
+import android.graphics.PorterDuff
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -21,6 +24,10 @@ class CriarTarefaBottomSheet : BottomSheetDialogFragment() {
 
     private var model: msgViewModel? = null
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setStyle(BottomSheetDialogFragment.STYLE_NORMAL, R.style.MyBottomSheetDialogTheme)
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.bottom_sheet_criar_tarefa, container, false)
@@ -43,9 +50,9 @@ class CriarTarefaBottomSheet : BottomSheetDialogFragment() {
             if(titulo == "") {
                 nomeTarefa.error = "Insira um título para a sua tarefa"
             } else {
-                model!!.dadosTarefa(Tarefa(titulo,descricao))
                 listaTarefasFazer.add(Tarefa(titulo, descricao))
                 Toast.makeText(context, "Tarefa cadastrada com sucesso!", Toast.LENGTH_SHORT).show()
+                model!!.dadosTarefa(Tarefa(titulo,descricao))
             }
         }
     }

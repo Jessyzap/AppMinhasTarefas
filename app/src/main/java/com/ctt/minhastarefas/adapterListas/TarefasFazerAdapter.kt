@@ -1,24 +1,26 @@
 package com.ctt.minhastarefas.adapterListas
 
 import android.content.Context
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentActivity
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentTransaction
+import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.RecyclerView
 import com.ctt.minhastarefas.R
 import com.ctt.minhastarefas.bottomSheets.VisualizarTarefaBottomSheet
 import com.ctt.minhastarefas.model.Tarefa
 import com.ctt.minhastarefas.model.msgViewModel
 import com.google.android.material.bottomsheet.BottomSheetDialog
+import java.lang.reflect.Array.get
 
 class TarefasFazerAdapter(private val listaTarefasFazer: MutableList<Tarefa>, private val contexto: Context) :
     RecyclerView.Adapter<TarefasFazerAdapter.TarefaHolder>() {
-
-
-    private var model: msgViewModel? = null
 
     class TarefaHolder(view: View) : RecyclerView.ViewHolder(view) {
 
@@ -33,33 +35,16 @@ class TarefasFazerAdapter(private val listaTarefasFazer: MutableList<Tarefa>, pr
 
     override fun onBindViewHolder(holder: TarefaHolder, position: Int) {
 
-        //val listaParaBottomSheet = mutableListOf<Tarefa>()
-
         holder.nome.text = listaTarefasFazer[position].nomeTarefa
         holder.descricao.text = listaTarefasFazer[position].descricaoTarefa
         holder.itemView.setOnClickListener {
 
             val bottomSheetVisualizar = VisualizarTarefaBottomSheet()
+            val bundle = Bundle()
+            bundle.putString("TITULO", listaTarefasFazer[position].nomeTarefa)
+            bundle.putString("DESCRICAO", listaTarefasFazer[position].descricaoTarefa)
+            bottomSheetVisualizar.setArguments(bundle)
             bottomSheetVisualizar.show((contexto as AppCompatActivity).supportFragmentManager,"BottomSheetVisualizar")
-
-//            listaParaBottomSheet.add(
-//                Tarefa(
-//                    listaTarefasFazer[position].nomeTarefa,
-//                    listaTarefasFazer[position].descricaoTarefa
-//                )
-//            )
-//            if (model != null) {
-//                model!!.dadosTarefa(listaParaBottomSheet)
-//            }
-
-//            val layoutBottomSheet = LayoutInflater.from(it.context).inflate(R.layout.bottom_sheet_visualizar_tarefa, null)
-//            val contexto = BottomSheetDialog(it.context)
-//            contexto.setContentView(layoutBottomSheet)
-//            contexto.show()
-//            VisualizarTarefaBottomSheet().apply {
-//                fragmentManager?.let { it1 -> show(it1, VisualizarTarefaBottomSheet.TAG) }
-//
-//            }
         }
     }
 
