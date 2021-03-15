@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.ctt.minhastarefas.R
 import com.ctt.minhastarefas.adapterListas.TarefasFazerAdapter
 import com.ctt.minhastarefas.bottomSheets.CriarTarefaBottomSheet
+import com.ctt.minhastarefas.bottomSheets.LupaFazerBottomSheet
 import com.ctt.minhastarefas.model.Tarefa
 import com.ctt.minhastarefas.model.msgViewModel
 
@@ -26,6 +27,7 @@ class FazerFragment : Fragment() {
 
 
     private lateinit var botao: Button
+    private lateinit var botaoLupaFazer: Button
 
 
     override fun onCreateView(
@@ -47,6 +49,7 @@ class FazerFragment : Fragment() {
 
         val contextoFazer = inflater.inflate(R.layout.fragment_fazer, container, false)
         botao = contextoFazer.findViewById(R.id.btnAdicionar)
+        botaoLupaFazer = contextoFazer.findViewById(R.id.btnLupaFazer)
         return contextoFazer
     }
 
@@ -59,11 +62,19 @@ class FazerFragment : Fragment() {
 
 
         val bottomSheetCriar = CriarTarefaBottomSheet()
+        val bottomSheetLupaFazer = LupaFazerBottomSheet()
 
         botao.setOnClickListener {
 
             fragmentManager?.let { it1 ->
                 bottomSheetCriar.show(it1, "CriarTarefaBottomSheet")
+            }
+        }
+
+        botaoLupaFazer.setOnClickListener {
+
+            fragmentManager?.let { it1 ->
+                bottomSheetLupaFazer.show(it1, "LupaFazerBottomSheet")
             }
         }
 

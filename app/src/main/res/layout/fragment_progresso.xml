@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout
+        android:theme="@style/Theme.MaterialComponents"
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
@@ -14,6 +15,7 @@
             android:layout_width="match_parent"
             tools:listitem="@layout/item_tarefas_progresso"/>
     <ImageView
+            android:contentDescription="@string/imagemlistavazia"
             android:id="@+id/imgProgressoVazia"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="220dp"
@@ -23,20 +25,27 @@
     <TextView
             android:id="@+id/txtProgressoVazia"
             android:layout_gravity="center_horizontal"
-            android:textSize="18dp"
+            android:textSize="18sp"
             android:layout_marginTop="370dp"
             android:textColor="@color/colorTitulo"
-            android:text="Opa...não há nada aqui"
+            android:text="@string/opa_nao_ha_nada_aqui_progresso"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
     <TextView
             android:id="@+id/txt2ProgressoVazia"
             android:layout_gravity="center_horizontal"
-            android:textSize="14dp"
+            android:textSize="14sp"
             android:layout_marginTop="395dp"
             android:textColor="@color/colorTitulo"
-            android:text="Inicie alguma tarefa da sua lista!"
+            android:text="@string/inicie_alguma_tarefa_da_sua_lista"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
-
+    <Button
+            android:id="@+id/btnLupaProgresso"
+            android:layout_height="70dp"
+            android:layout_width="70dp"
+            android:background="@drawable/ic_lupabuttonm"
+            android:layout_marginStart="120dp"
+            android:layout_marginTop="490dp"
+            android:layout_gravity="center_horizontal"/>
 </FrameLayout>

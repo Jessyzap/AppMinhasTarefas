@@ -18,6 +18,8 @@ import com.ctt.minhastarefas.fragments.ProgressoFragment
 import com.ctt.minhastarefas.fragments.ProgressoFragment.Companion.listaTarefasProgresso
 import com.ctt.minhastarefas.model.Tarefa
 import com.ctt.minhastarefas.model.msgViewModel
+import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
 class FinalizarTarefaBottomSheet() : BottomSheetDialogFragment() {
@@ -68,6 +70,18 @@ class FinalizarTarefaBottomSheet() : BottomSheetDialogFragment() {
             Toast.makeText(context, "clicou", Toast.LENGTH_SHORT).show()
 
             //listaTarefasFeitas.remove(Tarefa(tituloTarefa.text as String,descricaoTarefa.text as String))
+        }
+    }
+    override fun onStart() {
+        super.onStart()
+        val sheetContainer = requireView().parent as? ViewGroup ?: return
+        sheetContainer.layoutParams.height = ViewGroup.LayoutParams.MATCH_PARENT
+    }
+
+    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
+        return BottomSheetDialog(requireContext(), theme).apply {
+            behavior.state = BottomSheetBehavior.STATE_HALF_EXPANDED
+            behavior.halfExpandedRatio = 0.90F
         }
     }
 }

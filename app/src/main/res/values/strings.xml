@@ -6,4 +6,11 @@
     <string name="tarefas_titulo">Tarefas</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="que_tal_adicionar_alguma_tarefa_na_sua_lista">Que tal adicionar alguma tarefa na sua lista?</string>
+    <string name="opa_nao_ha_nada_aqui_fazer">Opa...não há nada aqui</string>
+    <string name="imagemlistavazia">ImagemListaVazia</string>
+    <string name="opa_nao_ha_nada_aqui_feitas">Opa...não há nada aqui</string>
+    <string name="finalize_as_suas_tarefas_no_seu_tempo">Finalize as suas tarefas no seu tempo :)</string>
+    <string name="opa_nao_ha_nada_aqui_progresso">Opa...não há nada aqui</string>
+    <string name="inicie_alguma_tarefa_da_sua_lista">Inicie alguma tarefa da sua lista!</string>
 </resources>

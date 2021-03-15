@@ -16,7 +16,6 @@ import com.ctt.minhastarefas.model.Tarefa
 class TarefasFeitasAdapter(private val listaTarefasFeitas: MutableList<Tarefa>, private val contexto: Context) :
     RecyclerView.Adapter<TarefasFeitasAdapter.TarefaFeitaHolder>() {
 
-    private val listaTarefasFeitasRemover = mutableListOf<Tarefa>()
 
     class TarefaFeitaHolder(view: View) : RecyclerView.ViewHolder(view) {
 
@@ -50,9 +49,9 @@ class TarefasFeitasAdapter(private val listaTarefasFeitas: MutableList<Tarefa>, 
 
     fun removerTarefaFeitas(position: Int) {
 
-        listaTarefasFeitas.removeAt(position)
+        listaTarefasFeitas.removeAt(position + 1)
         notifyDataSetChanged()
         //ListaTarefasActivity.listaCompanion.removeAll(listaTarefasFazerRemover)
-        listaTarefasFeitasRemover.clear()
+        listaTarefasFeitas.clear()
     }
 }

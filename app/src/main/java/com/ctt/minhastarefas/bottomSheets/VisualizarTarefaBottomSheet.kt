@@ -1,5 +1,6 @@
 package com.ctt.minhastarefas.bottomSheets
 
+import android.app.Dialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -14,6 +15,8 @@ import com.ctt.minhastarefas.fragments.FazerFragment.Companion.listaTarefasFazer
 import com.ctt.minhastarefas.fragments.ProgressoFragment.Companion.listaTarefasProgresso
 import com.ctt.minhastarefas.model.Tarefa
 import com.ctt.minhastarefas.model.msgViewModel
+import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
 class VisualizarTarefaBottomSheet() : BottomSheetDialogFragment() {
@@ -59,6 +62,18 @@ class VisualizarTarefaBottomSheet() : BottomSheetDialogFragment() {
         botaoIniciar.setOnClickListener {
             model!!.notificar("Tarefa iniciada")
             listaTarefasProgresso.add(Tarefa(tituloTarefa.text as String, descricaoTarefa.text as String))
+        }
+    }
+    override fun onStart() {
+        super.onStart()
+        val sheetContainer = requireView().parent as? ViewGroup ?: return
+        sheetContainer.layoutParams.height = ViewGroup.LayoutParams.MATCH_PARENT
+    }
+
+    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
+        return BottomSheetDialog(requireContext(), theme).apply {
+            behavior.state = BottomSheetBehavior.STATE_HALF_EXPANDED
+            behavior.halfExpandedRatio = 0.90F
         }
     }
 }
