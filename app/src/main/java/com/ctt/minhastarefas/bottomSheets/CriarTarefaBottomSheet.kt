@@ -1,9 +1,5 @@
 package com.ctt.minhastarefas.bottomSheets
 
-import android.app.Dialog
-import android.content.res.ColorStateList
-import android.graphics.Color
-import android.graphics.PorterDuff
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -16,8 +12,6 @@ import com.ctt.minhastarefas.R
 import com.ctt.minhastarefas.fragments.FazerFragment.Companion.listaTarefasFazer
 import com.ctt.minhastarefas.model.Tarefa
 import com.ctt.minhastarefas.model.msgViewModel
-import com.google.android.material.bottomsheet.BottomSheetBehavior
-import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
 class CriarTarefaBottomSheet : BottomSheetDialogFragment() {
@@ -34,6 +28,7 @@ class CriarTarefaBottomSheet : BottomSheetDialogFragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+
         super.onViewCreated(view, savedInstanceState)
 
         model = ViewModelProviders.of(activity!!).get(msgViewModel::class.java)

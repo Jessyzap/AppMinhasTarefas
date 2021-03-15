@@ -13,7 +13,7 @@ import com.ctt.minhastarefas.bottomSheets.FinalizadaTarefaBottomSheet
 import com.ctt.minhastarefas.bottomSheets.VisualizarTarefaBottomSheet
 import com.ctt.minhastarefas.model.Tarefa
 
-class TarefasFeitasAdapter(private val listaTarefasFeitas: MutableList<Tarefa>,private val contexto: Context) :
+class TarefasFeitasAdapter(private val listaTarefasFeitas: MutableList<Tarefa>, private val contexto: Context) :
     RecyclerView.Adapter<TarefasFeitasAdapter.TarefaFeitaHolder>() {
 
     private val listaTarefasFeitasRemover = mutableListOf<Tarefa>()
@@ -40,17 +40,17 @@ class TarefasFeitasAdapter(private val listaTarefasFeitas: MutableList<Tarefa>,p
             bundle.putString("TITULO", listaTarefasFeitas[position].nomeTarefa)
             bundle.putString("DESCRICAO", listaTarefasFeitas[position].descricaoTarefa)
             bottomSheetFinalizada.setArguments(bundle)
-            bottomSheetFinalizada.show((contexto as AppCompatActivity).supportFragmentManager, "FinalizadaTarefaBottomSheet")
-
-
+            bottomSheetFinalizada.show((contexto as AppCompatActivity).supportFragmentManager,"FinalizadaTarefaBottomSheet"
+            )
         }
     }
 
     override fun getItemCount(): Int = listaTarefasFeitas.size
 
 
-    fun removerTarefa() {
-        listaTarefasFeitas.removeAll(listaTarefasFeitasRemover)
+    fun removerTarefaFeitas(position: Int) {
+
+        listaTarefasFeitas.removeAt(position)
         notifyDataSetChanged()
         //ListaTarefasActivity.listaCompanion.removeAll(listaTarefasFazerRemover)
         listaTarefasFeitasRemover.clear()

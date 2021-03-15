@@ -14,6 +14,7 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.RecyclerView
 import com.ctt.minhastarefas.R
 import com.ctt.minhastarefas.bottomSheets.VisualizarTarefaBottomSheet
+import com.ctt.minhastarefas.fragments.FazerFragment
 import com.ctt.minhastarefas.model.Tarefa
 import com.ctt.minhastarefas.model.msgViewModel
 import com.google.android.material.bottomsheet.BottomSheetDialog
@@ -49,4 +50,5 @@ class TarefasFazerAdapter(private val listaTarefasFazer: MutableList<Tarefa>, pr
     }
 
     override fun getItemCount(): Int = listaTarefasFazer.size
+
 }

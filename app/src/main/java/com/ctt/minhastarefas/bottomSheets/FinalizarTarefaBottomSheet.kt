@@ -3,6 +3,7 @@ package com.ctt.minhastarefas.bottomSheets
 import android.app.Dialog
 import android.content.Context
 import android.os.Bundle
+import android.text.TextUtils.indexOf
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -21,7 +22,10 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
 class FinalizarTarefaBottomSheet() : BottomSheetDialogFragment() {
 
+    private var model: msgViewModel? = null
+
     private lateinit var botaoFinalizar: Button
+    private lateinit var botaoExcluir: TextView
 
     companion object {
         const val TAG = "FinalizarTarefaBottomSheet"
@@ -36,11 +40,14 @@ class FinalizarTarefaBottomSheet() : BottomSheetDialogFragment() {
 
         val contextoFinalizar = inflater.inflate(R.layout.bottom_sheet_finalizar_tarefa, container, false)
         botaoFinalizar = contextoFinalizar.findViewById(R.id.btnFinalizarTarefa)
+        botaoExcluir = contextoFinalizar.findViewById(R.id.btnExcluirTarefaFinalizar)
         return contextoFinalizar
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        model = ViewModelProviders.of(activity!!).get(msgViewModel::class.java)
 
         val tituloTarefa = view.findViewById<TextView>(R.id.txtTituloProgresso)
         val descricaoTarefa = view.findViewById<TextView>(R.id.txtDescricaoProgresso)
@@ -53,7 +60,14 @@ class FinalizarTarefaBottomSheet() : BottomSheetDialogFragment() {
 
         // adicionar na lista feitas
         botaoFinalizar.setOnClickListener {
-            listaTarefasFeitas.add(Tarefa(tituloTarefa.text as String,descricaoTarefa.text as String))
+            model!!.notificar("Tarefa finalizar")
+            listaTarefasFeitas.add(Tarefa(tituloTarefa.text as String, descricaoTarefa.text as String))
+        }
+
+        botaoExcluir.setOnClickListener() {
+            Toast.makeText(context, "clicou", Toast.LENGTH_SHORT).show()
+
+            //listaTarefasFeitas.remove(Tarefa(tituloTarefa.text as String,descricaoTarefa.text as String))
         }
     }
 }

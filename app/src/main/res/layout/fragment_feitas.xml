@@ -13,4 +13,29 @@
             android:id="@+id/rvListaFeitas"
             android:layout_width="match_parent"
             tools:listitem="@layout/item_tarefas_feitas"/>
+    <ImageView
+            android:id="@+id/imgFeitasVazia"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="220dp"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:src="@drawable/ic_visionary"/>
+    <TextView
+            android:id="@+id/txtFeitasVazia"
+            android:layout_gravity="center_horizontal"
+            android:textSize="18dp"
+            android:layout_marginTop="370dp"
+            android:textColor="@color/colorTitulo"
+            android:text="Opa...não há nada aqui"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    <TextView
+            android:id="@+id/txt2FeitasVazia"
+            android:layout_gravity="center_horizontal"
+            android:textSize="14dp"
+            android:layout_marginTop="395dp"
+            android:textColor="@color/colorTitulo"
+            android:text="Finalize as suas tarefas no seu tempo :)"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
 </FrameLayout>

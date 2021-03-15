@@ -1,21 +1,15 @@
 package com.ctt.minhastarefas.bottomSheets
 
-import android.app.Dialog
-import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
-import androidx.lifecycle.ViewModelProviders
 import com.ctt.minhastarefas.R
-import com.ctt.minhastarefas.fragments.FazerFragment
-import com.ctt.minhastarefas.fragments.ProgressoFragment
-import com.ctt.minhastarefas.fragments.ProgressoFragment.Companion.listaTarefasProgresso
+import com.ctt.minhastarefas.adapterListas.TarefasFeitasAdapter
+import com.ctt.minhastarefas.fragments.FeitasFragment.Companion.listaTarefasFeitas
 import com.ctt.minhastarefas.model.Tarefa
-import com.ctt.minhastarefas.model.msgViewModel
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
 class FinalizadaTarefaBottomSheet() : BottomSheetDialogFragment() {
@@ -50,9 +44,17 @@ class FinalizadaTarefaBottomSheet() : BottomSheetDialogFragment() {
         tituloTarefa.text = tituloTarefaRecebido
         descricaoTarefa.text = descricaoTarefaRecebida
 
-
         botaoExcluir.setOnClickListener {
 
+            context?.let { it1 -> TarefasFeitasAdapter(listaTarefasFeitas, it1) }?.removerTarefaFeitas(
+                listaTarefasFeitas.indexOf(
+                    Tarefa(
+                        tituloTarefa.text as String,
+                        descricaoTarefa.text as String
+                    )
+                )
+            )
+            Toast.makeText(context, "clicou", Toast.LENGTH_SHORT).show()
         }
     }
 }

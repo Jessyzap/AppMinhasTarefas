@@ -6,25 +6,46 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.ctt.minhastarefas.R
 import com.ctt.minhastarefas.adapterListas.TarefasFazerAdapter
 import com.ctt.minhastarefas.bottomSheets.CriarTarefaBottomSheet
 import com.ctt.minhastarefas.model.Tarefa
+import com.ctt.minhastarefas.model.msgViewModel
 
 
 class FazerFragment : Fragment() {
 
+    private var model: msgViewModel? = null
+    private lateinit var imagemFazerVazia: ImageView
+    private lateinit var textoFazerVazia: TextView
+    private lateinit var segundoTextoFazerVazia: TextView
+
+
     private lateinit var botao: Button
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
 
-        val contextoFazer = inflater.inflate(R.layout.fragment_fazer, container, false)
+        model = ViewModelProviders.of(activity!!).get(msgViewModel::class.java)
 
+        model!!.dados.observe(viewLifecycleOwner, object : Observer<Tarefa> {
+            override fun onChanged(tarefa: Tarefa) {
+                if (tarefa.nomeTarefa != ""){
+                    imagemFazerVazia.visibility = View.GONE
+                    textoFazerVazia.visibility = View.GONE
+                    segundoTextoFazerVazia.visibility = View.GONE
+                }
+            }
+        })
+
+        val contextoFazer = inflater.inflate(R.layout.fragment_fazer, container, false)
         botao = contextoFazer.findViewById(R.id.btnAdicionar)
         return contextoFazer
     }
@@ -32,25 +53,18 @@ class FazerFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-       // val model = ViewModelProviders.of(activity!!).get(msgViewModel::class.java)
-
-//        var tituloTarefa: String
-//        var descricaoTarefa: String
+        imagemFazerVazia = view.findViewById(R.id.imgFazerVazia)
+        textoFazerVazia = view.findViewById(R.id.txtFazerVazia)
+        segundoTextoFazerVazia = view.findViewById(R.id.txt2FazerVazia)
 
 
         val bottomSheetCriar = CriarTarefaBottomSheet()
 
         botao.setOnClickListener {
 
-            fragmentManager?.let { it1 -> bottomSheetCriar.show(it1, "CriarTarefaBottomSheet")
+            fragmentManager?.let { it1 ->
+                bottomSheetCriar.show(it1, "CriarTarefaBottomSheet")
             }
-
-//            model.dados.observe(viewLifecycleOwner,
-//                { t ->
-//                    tituloTarefa = t.nomeTarefa
-//                    descricaoTarefa = t.descricaoTarefa
-//                    listaTarefasFazer.add(Tarefa(tituloTarefa, descricaoTarefa))
-//                })
         }
 
         val rvFazer = view.findViewById<RecyclerView>(R.id.rvListaFazer)
@@ -62,5 +76,9 @@ class FazerFragment : Fragment() {
     companion object {
         val listaTarefasFazer = mutableListOf<Tarefa>()
     }
+
 }
+
+
+
 

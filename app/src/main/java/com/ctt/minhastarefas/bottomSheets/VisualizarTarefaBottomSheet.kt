@@ -7,14 +7,18 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
+import androidx.lifecycle.ViewModelProviders
 import com.ctt.minhastarefas.R
 import com.ctt.minhastarefas.adapterListas.TarefasFazerAdapter
 import com.ctt.minhastarefas.fragments.FazerFragment.Companion.listaTarefasFazer
 import com.ctt.minhastarefas.fragments.ProgressoFragment.Companion.listaTarefasProgresso
 import com.ctt.minhastarefas.model.Tarefa
+import com.ctt.minhastarefas.model.msgViewModel
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
 class VisualizarTarefaBottomSheet() : BottomSheetDialogFragment() {
+
+    private var model: msgViewModel? = null
 
     private lateinit var botaoIniciar: Button
 
@@ -40,6 +44,8 @@ class VisualizarTarefaBottomSheet() : BottomSheetDialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        model = ViewModelProviders.of(activity!!).get(msgViewModel::class.java)
+
         val tituloTarefa = view.findViewById<TextView>(R.id.txtTituloVisualizar)
         val descricaoTarefa = view.findViewById<TextView>(R.id.txtDescricaoVisualizar)
 
@@ -51,6 +57,7 @@ class VisualizarTarefaBottomSheet() : BottomSheetDialogFragment() {
 
         // adicionar na lista progresso
         botaoIniciar.setOnClickListener {
+            model!!.notificar("Tarefa iniciada")
             listaTarefasProgresso.add(Tarefa(tituloTarefa.text as String, descricaoTarefa.text as String))
         }
     }

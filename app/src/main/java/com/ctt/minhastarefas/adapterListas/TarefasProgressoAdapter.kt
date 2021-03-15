@@ -16,8 +16,6 @@ import com.ctt.minhastarefas.model.Tarefa
 class TarefasProgressoAdapter(private val listaTarefasProgresso: MutableList<Tarefa>, private val contexto: Context) :
     RecyclerView.Adapter<TarefasProgressoAdapter.TarefaProgressoHolder>() {
 
-    private val listaTarefasProgressoRemover = mutableListOf<Tarefa>()
-
     class TarefaProgressoHolder(view: View) : RecyclerView.ViewHolder(view) {
 
         val nome: TextView = view.findViewById(R.id.txtTarefaProgresso)
@@ -41,10 +39,8 @@ class TarefasProgressoAdapter(private val listaTarefasProgresso: MutableList<Tar
             bundle.putString("DESCRICAO", listaTarefasProgresso[position].descricaoTarefa)
             bottomSheetProgresso.setArguments(bundle)
             bottomSheetProgresso.show((contexto as AppCompatActivity).supportFragmentManager, "BottomSheetProgresso")
-
         }
     }
-
 
     override fun getItemCount(): Int = listaTarefasProgresso.size
 

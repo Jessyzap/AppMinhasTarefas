@@ -6,6 +6,7 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_gravity="center_horizontal"
         tools:context=".fragments.FazerFragment">
 
     <androidx.recyclerview.widget.RecyclerView
@@ -35,6 +36,32 @@
             android:backgroundTint="@color/colorBotao"
             app:icon="@drawable/ic_adicionar"/>
 
+    <ImageView
+            android:id="@+id/imgFazerVazia"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="220dp"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:src="@drawable/ic_visionary"/>
+    <TextView
+            android:id="@+id/txtFazerVazia"
+            android:layout_gravity="center_horizontal"
+            android:textSize="18dp"
+            android:layout_marginTop="370dp"
+            android:textColor="@color/colorTitulo"
+            android:text="Opa...não há nada aqui"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    <TextView
+            android:id="@+id/txt2FazerVazia"
+            android:layout_gravity="center_horizontal"
+            android:textSize="14dp"
+            android:layout_marginTop="395dp"
+            android:textColor="@color/colorTitulo"
+            android:text="Que tal adicionar alguma tarefa na sua lista?"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
     <!--
     <androidx.coordinatorlayout.widget.CoordinatorLayout
 
@@ -57,7 +84,6 @@
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
 -->
-
 
 
 </FrameLayout>
