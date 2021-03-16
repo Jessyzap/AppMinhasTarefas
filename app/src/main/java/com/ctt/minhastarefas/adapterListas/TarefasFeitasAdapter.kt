@@ -9,8 +9,8 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.ctt.minhastarefas.R
+import com.ctt.minhastarefas.bottomSheets.EditarFeitaBottomSheet
 import com.ctt.minhastarefas.bottomSheets.FinalizadaTarefaBottomSheet
-import com.ctt.minhastarefas.bottomSheets.VisualizarTarefaBottomSheet
 import com.ctt.minhastarefas.model.Tarefa
 
 class TarefasFeitasAdapter(private val listaTarefasFeitas: MutableList<Tarefa>, private val contexto: Context) :
@@ -47,11 +47,29 @@ class TarefasFeitasAdapter(private val listaTarefasFeitas: MutableList<Tarefa>, 
     override fun getItemCount(): Int = listaTarefasFeitas.size
 
 
+    fun editarTarefaFeita(titulo: String, descricao: String){
+
+        val bottomSheetEditar = EditarFeitaBottomSheet()
+        val bundle = Bundle()
+        bundle.putString("TITULO", titulo)
+        bundle.putString("DESCRICAO", descricao)
+        bottomSheetEditar.setArguments(bundle)
+        bottomSheetEditar.show((contexto as AppCompatActivity).supportFragmentManager,"")
+    }
+
+
+    fun substituirTarefaFeita(position: Int,tarefa: Tarefa) {
+        listaTarefasFeitas.set(position + 1,tarefa)
+        notifyDataSetChanged()
+        //listaTarefasFazer.clear()
+    }
+
+
+
     fun removerTarefaFeitas(position: Int) {
 
         listaTarefasFeitas.removeAt(position + 1)
         notifyDataSetChanged()
-        //ListaTarefasActivity.listaCompanion.removeAll(listaTarefasFazerRemover)
         listaTarefasFeitas.clear()
     }
 }

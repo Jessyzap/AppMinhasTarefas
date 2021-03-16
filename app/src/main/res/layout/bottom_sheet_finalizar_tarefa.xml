@@ -20,6 +20,7 @@
             android:orientation="horizontal">
 
         <ImageView
+                android:id="@+id/btnEditarFinalizar"
                 android:maxHeight="20dp"
                 android:maxWidth="20dp"
                 android:layout_width="30dp"

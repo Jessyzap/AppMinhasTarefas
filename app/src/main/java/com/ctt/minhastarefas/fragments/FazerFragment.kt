@@ -17,14 +17,12 @@ import com.ctt.minhastarefas.bottomSheets.LupaFazerBottomSheet
 import com.ctt.minhastarefas.model.Tarefa
 import com.ctt.minhastarefas.model.msgViewModel
 
-
 class FazerFragment : Fragment() {
 
     private var model: msgViewModel? = null
     private lateinit var imagemFazerVazia: ImageView
     private lateinit var textoFazerVazia: TextView
     private lateinit var segundoTextoFazerVazia: TextView
-
 
     private lateinit var botao: Button
     private lateinit var botaoLupaFazer: Button
@@ -35,11 +33,11 @@ class FazerFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        model = ViewModelProviders.of(activity!!).get(msgViewModel::class.java)
+       model = ViewModelProviders.of(activity!!).get(msgViewModel::class.java)
 
-        model!!.dados.observe(viewLifecycleOwner, object : Observer<Tarefa> {
-            override fun onChanged(tarefa: Tarefa) {
-                if (tarefa.nomeTarefa != ""){
+        model!!.textoNotificacao.observe(viewLifecycleOwner, object : Observer<String> {
+            override fun onChanged(texto: String) {
+                if (texto != ""){
                     imagemFazerVazia.visibility = View.GONE
                     textoFazerVazia.visibility = View.GONE
                     segundoTextoFazerVazia.visibility = View.GONE
@@ -51,7 +49,10 @@ class FazerFragment : Fragment() {
         botao = contextoFazer.findViewById(R.id.btnAdicionar)
         botaoLupaFazer = contextoFazer.findViewById(R.id.btnLupaFazer)
         return contextoFazer
+
+       // return inflater.inflate(R.layout.fragment_fazer, container, false)
     }
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -59,6 +60,8 @@ class FazerFragment : Fragment() {
         imagemFazerVazia = view.findViewById(R.id.imgFazerVazia)
         textoFazerVazia = view.findViewById(R.id.txtFazerVazia)
         segundoTextoFazerVazia = view.findViewById(R.id.txt2FazerVazia)
+
+        val botao = view.findViewById<Button>(R.id.btnAdicionar)
 
 
         val bottomSheetCriar = CriarTarefaBottomSheet()
@@ -87,7 +90,6 @@ class FazerFragment : Fragment() {
     companion object {
         val listaTarefasFazer = mutableListOf<Tarefa>()
     }
-
 }
 
 

@@ -5,6 +5,8 @@
         android:layout_width="match_parent"
         android:layout_height="80dp"
         android:layout_marginTop="5dp"
+        android:paddingHorizontal="15dp"
+        android:paddingVertical="10dp"
         android:background="#FFFFFF">
 
     <TextView
@@ -16,19 +18,19 @@
             android:layout_height="wrap_content"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toTopOf="@+id/txtDescricaoTarefaFazer"
-            app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginStart="24dp"/>
+            app:layout_constraintStart_toStartOf="parent"/>
 
     <TextView
             android:id="@+id/txtDescricaoTarefaFazer"
             android:text="descrição"
+            android:singleLine="true"
+            android:ellipsize="end"
             android:textColor="@color/colorDescricao"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="parent"
-            android:layout_marginBottom="16dp"
-            app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginStart="24dp"/>
+            android:layout_marginBottom="5dp"
+            app:layout_constraintStart_toStartOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

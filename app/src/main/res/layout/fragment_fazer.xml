@@ -73,8 +73,8 @@
             android:layout_gravity="center_horizontal"/>
     <Button
             android:id="@+id/btnLupaFazer"
-            android:layout_height="55dp"
-            android:layout_width="55dp"
+            android:layout_height="57dp"
+            android:layout_width="57dp"
             android:layout_marginStart="120dp"
             android:background="@drawable/ic_lupabuttonm"
             android:layout_marginTop="420dp"

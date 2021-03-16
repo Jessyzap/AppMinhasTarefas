@@ -7,18 +7,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.FragmentActivity
-import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentTransaction
-import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.RecyclerView
 import com.ctt.minhastarefas.R
+import com.ctt.minhastarefas.bottomSheets.EditarFazerBottomSheet
 import com.ctt.minhastarefas.bottomSheets.VisualizarTarefaBottomSheet
-import com.ctt.minhastarefas.fragments.FazerFragment
 import com.ctt.minhastarefas.model.Tarefa
-import com.ctt.minhastarefas.model.msgViewModel
-import com.google.android.material.bottomsheet.BottomSheetDialog
-import java.lang.reflect.Array.get
 
 class TarefasFazerAdapter(private val listaTarefasFazer: MutableList<Tarefa>, private val contexto: Context) :
     RecyclerView.Adapter<TarefasFazerAdapter.TarefaHolder>() {
@@ -51,4 +44,32 @@ class TarefasFazerAdapter(private val listaTarefasFazer: MutableList<Tarefa>, pr
 
     override fun getItemCount(): Int = listaTarefasFazer.size
 
+    //fun adicionarTarefa(tarefa: Tarefa){
+     //   listaTarefasFazer.add(tarefa)
+    //    notifyDataSetChanged()
+//    }
+
+    fun editarTarefaFazer(titulo: String, descricao: String){
+
+        val bottomSheetEditar = EditarFazerBottomSheet()
+        val bundle = Bundle()
+        bundle.putString("TITULO", titulo)
+        bundle.putString("DESCRICAO", descricao)
+        bottomSheetEditar.setArguments(bundle)
+        bottomSheetEditar.show((contexto as AppCompatActivity).supportFragmentManager,"")
+    }
+
+    fun substituirTarefaFazer(position: Int,tarefa: Tarefa) {
+
+        listaTarefasFazer.set(position + 1,tarefa)
+        notifyDataSetChanged()
+        //listaTarefasFazer.clear()
+    }
+
+    fun removerTarefaFazer(position: Int) {
+
+        listaTarefasFazer.removeAt(position + 1)
+        notifyDataSetChanged()
+        //listaTarefasFazer.clear()
+    }
 }

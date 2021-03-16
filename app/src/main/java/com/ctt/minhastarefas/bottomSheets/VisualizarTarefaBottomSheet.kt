@@ -6,12 +6,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProviders
 import com.ctt.minhastarefas.R
 import com.ctt.minhastarefas.adapterListas.TarefasFazerAdapter
+import com.ctt.minhastarefas.adapterListas.TarefasFeitasAdapter
+import com.ctt.minhastarefas.fragments.FazerFragment
 import com.ctt.minhastarefas.fragments.FazerFragment.Companion.listaTarefasFazer
+import com.ctt.minhastarefas.fragments.FeitasFragment
 import com.ctt.minhastarefas.fragments.ProgressoFragment.Companion.listaTarefasProgresso
 import com.ctt.minhastarefas.model.Tarefa
 import com.ctt.minhastarefas.model.msgViewModel
@@ -24,10 +29,12 @@ class VisualizarTarefaBottomSheet() : BottomSheetDialogFragment() {
     private var model: msgViewModel? = null
 
     private lateinit var botaoIniciar: Button
+    private lateinit var botaoExcluir: TextView
+    private lateinit var botaoEditar: ImageView
 
-    companion object {
-        const val TAG = "VisualizarTarefaBottomSheet"
-    }
+//    companion object {
+//        const val TAG = "VisualizarTarefaBottomSheet"
+//    }
     //Editar tarefa
     //Excluir tarefa
     //Iniciar tarefa
@@ -41,6 +48,8 @@ class VisualizarTarefaBottomSheet() : BottomSheetDialogFragment() {
 
         val contextoVisualizar = inflater.inflate(R.layout.bottom_sheet_visualizar_tarefa, container, false)
         botaoIniciar = contextoVisualizar.findViewById(R.id.btnIniciarTarefa)
+        botaoExcluir = contextoVisualizar.findViewById(R.id.btnExcluirTarefaVisualizar)
+        botaoEditar = contextoVisualizar.findViewById(R.id.btnEditarVisualizar)
         return contextoVisualizar
     }
 
@@ -62,8 +71,38 @@ class VisualizarTarefaBottomSheet() : BottomSheetDialogFragment() {
         botaoIniciar.setOnClickListener {
             model!!.notificar("Tarefa iniciada")
             listaTarefasProgresso.add(Tarefa(tituloTarefa.text as String, descricaoTarefa.text as String))
+
+            context?.let { it1 -> TarefasFazerAdapter(FazerFragment.listaTarefasFazer, it1) }?.removerTarefaFazer(
+                FeitasFragment.listaTarefasFeitas.indexOf(
+                    Tarefa(
+                        tituloTarefa.text as String,
+                        descricaoTarefa.text as String
+                    )
+                )
+            )
+            Toast.makeText(context, "A tarefa foi iniciada", Toast.LENGTH_SHORT).show()
+        }
+
+
+        botaoEditar.setOnClickListener {
+
+            context?.let { it1 ->
+                TarefasFazerAdapter(
+                    listaTarefasFazer,
+                    it1
+                ).editarTarefaFazer(tituloTarefa.text as String, descricaoTarefa.text as String)
+            }
+        }
+
+
+
+        botaoExcluir.setOnClickListener {
+            Toast.makeText(context, "A tarefa foi excluída", Toast.LENGTH_SHORT).show()
+            //listaTarefasProgresso.remove(Tarefa(tituloTarefa.text as String, descricaoTarefa.text as String))
         }
     }
+
+
     override fun onStart() {
         super.onStart()
         val sheetContainer = requireView().parent as? ViewGroup ?: return
