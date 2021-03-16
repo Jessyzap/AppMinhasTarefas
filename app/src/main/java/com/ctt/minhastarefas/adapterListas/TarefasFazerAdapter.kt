@@ -39,7 +39,6 @@ class TarefasFazerAdapter(private val listaTarefasFazer: MutableList<Tarefa>, pr
             bundle.putString("TITULO", listaTarefasFazer[position].nomeTarefa)
             bundle.putString("DESCRICAO", listaTarefasFazer[position].descricaoTarefa)
             bundle.putString("POSICAO", position.toString())
-            Toast.makeText(it.context,position.toString(),Toast.LENGTH_SHORT).show()
             bottomSheetVisualizar.setArguments(bundle)
             bottomSheetVisualizar.show((contexto as AppCompatActivity).supportFragmentManager,"BottomSheetVisualizar")
         }
@@ -52,22 +51,30 @@ class TarefasFazerAdapter(private val listaTarefasFazer: MutableList<Tarefa>, pr
     //    notifyDataSetChanged()
 //    }
 
-    fun editarTarefaFazer(titulo: String, descricao: String){
+    fun editarTarefaFazer(titulo: String, descricao: String,posicao: Int){
 
         val bottomSheetEditar = EditarFazerBottomSheet()
         val bundle = Bundle()
         bundle.putString("TITULO", titulo)
         bundle.putString("DESCRICAO", descricao)
+        bundle.putString("POSICAO", posicao.toString())
         bottomSheetEditar.setArguments(bundle)
         bottomSheetEditar.show((contexto as AppCompatActivity).supportFragmentManager,"")
     }
 
-    fun substituirTarefaFazer(position: Int,tarefa: Tarefa) {
+    fun substituirTarefaFazer(tituloFazer: String, descricaoFazer: String, posicaoFazer: String) {
 
-        listaTarefasFazer.set(position,tarefa)
+        listaTarefasFazer.set(posicaoFazer.toInt(),Tarefa(tituloFazer,descricaoFazer))
         notifyDataSetChanged()
         //listaTarefasFazer.clear()
     }
+
+//    fun substituirTarefaFazer(position: Int,tarefa: Tarefa) {
+//
+//        listaTarefasFazer.set(position,tarefa)
+//        notifyDataSetChanged()
+//        //listaTarefasFazer.clear()
+//    }
 
     fun removerTarefaFazer(position: Int) {
 

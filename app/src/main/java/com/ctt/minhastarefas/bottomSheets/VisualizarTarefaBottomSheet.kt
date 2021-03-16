@@ -14,6 +14,7 @@ import androidx.lifecycle.ViewModelProviders
 import com.ctt.minhastarefas.R
 import com.ctt.minhastarefas.adapterListas.TarefasFazerAdapter
 import com.ctt.minhastarefas.adapterListas.TarefasFeitasAdapter
+import com.ctt.minhastarefas.adapterListas.TarefasProgressoAdapter
 import com.ctt.minhastarefas.fragments.FazerFragment
 import com.ctt.minhastarefas.fragments.FazerFragment.Companion.listaTarefasFazer
 import com.ctt.minhastarefas.fragments.FeitasFragment
@@ -75,7 +76,8 @@ class VisualizarTarefaBottomSheet() : BottomSheetDialogFragment() {
 
             if (posicaoTarefaRecebida != null) {
                 context?.let { it1 -> TarefasFazerAdapter(FazerFragment.listaTarefasFazer, it1) }?.removerTarefaFazer(
-                    posicaoTarefaRecebida)
+                    posicaoTarefaRecebida
+                )
             }
 
 //            context?.let { it1 -> TarefasFazerAdapter(FazerFragment.listaTarefasFazer, it1) }?.removerTarefaFazer(
@@ -86,26 +88,41 @@ class VisualizarTarefaBottomSheet() : BottomSheetDialogFragment() {
 //                    )
 //                )
 //            )
-                        Toast . makeText (context, "A tarefa foi iniciada", Toast.LENGTH_SHORT
+            Toast.makeText(
+                context, "A tarefa foi iniciada", Toast.LENGTH_SHORT
             ).show()
+            dismiss()
         }
+
+
 
 
         botaoEditar.setOnClickListener {
 
             context?.let { it1 ->
-                TarefasFazerAdapter(
-                    listaTarefasFazer,
-                    it1
-                ).editarTarefaFazer(tituloTarefa.text as String, descricaoTarefa.text as String)
+                if (posicaoTarefaRecebida != null) {
+                    TarefasFazerAdapter(
+                        listaTarefasFazer,
+                        it1
+                    ).editarTarefaFazer(tituloTarefa.text as String, descricaoTarefa.text as String,posicaoTarefaRecebida )
+                }
             }
+            dismiss()
         }
 
 
 
         botaoExcluir.setOnClickListener {
-            Toast.makeText(context, "A tarefa foi excluída", Toast.LENGTH_SHORT).show()
+
             //listaTarefasProgresso.remove(Tarefa(tituloTarefa.text as String, descricaoTarefa.text as String))
+            if (posicaoTarefaRecebida != null) {
+                context?.let { it1 -> TarefasFazerAdapter(listaTarefasFazer, it1) }
+                    ?.removerTarefaFazer(
+                        posicaoTarefaRecebida
+                    )
+            }
+            Toast.makeText(context, "A tarefa foi excluída", Toast.LENGTH_SHORT).show()
+            dismiss()
         }
     }
 

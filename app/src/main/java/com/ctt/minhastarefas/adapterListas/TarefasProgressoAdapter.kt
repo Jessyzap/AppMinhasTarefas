@@ -39,7 +39,6 @@ class TarefasProgressoAdapter(private val listaTarefasProgresso: MutableList<Tar
             bundle.putString("TITULO", listaTarefasProgresso[position].nomeTarefa)
             bundle.putString("DESCRICAO", listaTarefasProgresso[position].descricaoTarefa)
             bundle.putString("POSICAO", position.toString())
-            Toast.makeText(it.context,position.toString(), Toast.LENGTH_SHORT).show()
             bottomSheetProgresso.setArguments(bundle)
             bottomSheetProgresso.show((contexto as AppCompatActivity).supportFragmentManager, "BottomSheetProgresso")
         }
@@ -52,18 +51,19 @@ class TarefasProgressoAdapter(private val listaTarefasProgresso: MutableList<Tar
 //        notifyDataSetChanged()
 //    }
 
-    fun editarTarefaProgresso(titulo: String, descricao: String){
+    fun editarTarefaProgresso(titulo: String, descricao: String, posicao: Int?){
 
         val bottomSheetEditar = EditarProgressoBottomSheet()
         val bundle = Bundle()
         bundle.putString("TITULO", titulo)
         bundle.putString("DESCRICAO", descricao)
+        bundle.putString("POSICAO", posicao.toString())
         bottomSheetEditar.setArguments(bundle)
         bottomSheetEditar.show((contexto as AppCompatActivity).supportFragmentManager,"")
     }
 
-    fun substituirTarefaProgresso(position: Int,tarefa: Tarefa) {
-        listaTarefasProgresso.set(position,tarefa)
+    fun substituirTarefaProgresso(tituloProgresso: String, descricaoProgresso: String, posicaoProgresso: String) {
+        listaTarefasProgresso.set(posicaoProgresso.toInt(),Tarefa(tituloProgresso,descricaoProgresso))
         notifyDataSetChanged()
         //listaTarefasFazer.clear()
     }

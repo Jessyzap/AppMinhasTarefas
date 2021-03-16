@@ -56,6 +56,7 @@ class EditarFazerBottomSheet() : BottomSheetDialogFragment() {
 
         val tituloTarefaRecebido = getArguments()?.getString("TITULO")
         val descricaoTarefaRecebida = getArguments()?.getString("DESCRICAO")
+        val posicaoTarefaRecebida = getArguments()?.getString("POSICAO")?.toInt()
 
         tituloTarefa.setText(tituloTarefaRecebido)
         descricaoTarefa.setText(descricaoTarefaRecebida)
@@ -64,12 +65,21 @@ class EditarFazerBottomSheet() : BottomSheetDialogFragment() {
         botaoSalvar.setOnClickListener {
 
             context?.let { it1 -> TarefasFazerAdapter(listaTarefasFazer, it1) }?.substituirTarefaFazer(
-                FazerFragment.listaTarefasFazer.indexOf(
-                    Tarefa(tituloTarefa.text.toString(), descricaoTarefa.text.toString())
-                ), Tarefa(tituloTarefa.text.toString(), descricaoTarefa.text.toString())
+                tituloTarefa.text.toString(),descricaoTarefa.text.toString(),posicaoTarefaRecebida.toString()
             )
             Toast.makeText(context, "A tarefa foi alterada", Toast.LENGTH_LONG).show()
+            dismiss()
         }
+
+
+//
+//            context?.let { it1 -> TarefasFazerAdapter(listaTarefasFazer, it1) }?.substituirTarefaFazer(
+//                FazerFragment.listaTarefasFazer.indexOf(
+//                    Tarefa(tituloTarefa.text.toString(), descricaoTarefa.text.toString())
+//                ), Tarefa(tituloTarefa.text.toString(), descricaoTarefa.text.toString())
+//            )
+//            Toast.makeText(context, "A tarefa foi alterada", Toast.LENGTH_LONG).show()
+//        }
     }
 
 

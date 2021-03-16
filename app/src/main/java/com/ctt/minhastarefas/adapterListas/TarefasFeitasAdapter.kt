@@ -40,7 +40,6 @@ class TarefasFeitasAdapter(private val listaTarefasFeitas: MutableList<Tarefa>, 
             bundle.putString("TITULO", listaTarefasFeitas[position].nomeTarefa)
             bundle.putString("DESCRICAO", listaTarefasFeitas[position].descricaoTarefa)
             bundle.putString("POSICAO", position.toString())
-            Toast.makeText(it.context,position.toString(), Toast.LENGTH_SHORT).show()
             bottomSheetFinalizada.setArguments(bundle)
             bottomSheetFinalizada.show((contexto as AppCompatActivity).supportFragmentManager,"FinalizadaTarefaBottomSheet"
             )
@@ -50,28 +49,28 @@ class TarefasFeitasAdapter(private val listaTarefasFeitas: MutableList<Tarefa>, 
     override fun getItemCount(): Int = listaTarefasFeitas.size
 
 
-    fun editarTarefaFeita(titulo: String, descricao: String){
+    fun editarTarefaFeita(titulo: String, descricao: String, posicao: Int){
 
         val bottomSheetEditar = EditarFeitaBottomSheet()
         val bundle = Bundle()
         bundle.putString("TITULO", titulo)
         bundle.putString("DESCRICAO", descricao)
+        bundle.putString("POSICAO", posicao.toString())
         bottomSheetEditar.setArguments(bundle)
         bottomSheetEditar.show((contexto as AppCompatActivity).supportFragmentManager,"")
     }
 
 
-    fun substituirTarefaFeita(position: Int,tarefa: Tarefa) {
-        listaTarefasFeitas.set(position,tarefa)
+    fun substituirTarefaFeita(tituloFeita: String, descricaoFeita: String, posicaoFeita: String) {
+        listaTarefasFeitas.set(posicaoFeita.toInt(),Tarefa(tituloFeita,descricaoFeita))
         notifyDataSetChanged()
         //listaTarefasFazer.clear()
     }
 
 
-
     fun removerTarefaFeitas(position: Int) {
 
-        listaTarefasFeitas.removeAt(position + 1)
+        listaTarefasFeitas.removeAt(position )
         notifyDataSetChanged()
         listaTarefasFeitas.clear()
     }

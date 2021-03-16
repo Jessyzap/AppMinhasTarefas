@@ -1,9 +1,7 @@
 package com.ctt.minhastarefas.bottomSheets
 
 import android.app.Dialog
-import android.content.Context
 import android.os.Bundle
-import android.text.TextUtils.indexOf
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,13 +11,9 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProviders
 import com.ctt.minhastarefas.R
-import com.ctt.minhastarefas.adapterListas.TarefasFazerAdapter
 import com.ctt.minhastarefas.adapterListas.TarefasProgressoAdapter
-import com.ctt.minhastarefas.fragments.FazerFragment
-import com.ctt.minhastarefas.fragments.FeitasFragment
 import com.ctt.minhastarefas.fragments.FeitasFragment.Companion.listaTarefasFeitas
 import com.ctt.minhastarefas.fragments.ProgressoFragment
-import com.ctt.minhastarefas.fragments.ProgressoFragment.Companion.listaTarefasProgresso
 import com.ctt.minhastarefas.model.Tarefa
 import com.ctt.minhastarefas.model.msgViewModel
 import com.google.android.material.bottomsheet.BottomSheetBehavior
@@ -74,25 +68,17 @@ class FinalizarTarefaBottomSheet() : BottomSheetDialogFragment() {
             listaTarefasFeitas.add(Tarefa(tituloTarefa.text as String, descricaoTarefa.text as String))
 
             if (posicaoTarefaRecebida != null) {
-                context?.let { it1 -> TarefasProgressoAdapter(ProgressoFragment.listaTarefasProgresso, it1) }?.removerTarefaProgresso(
-                    posicaoTarefaRecebida)
+                context?.let { it1 -> TarefasProgressoAdapter(ProgressoFragment.listaTarefasProgresso, it1) }
+                    ?.removerTarefaProgresso(
+                        posicaoTarefaRecebida
+                    )
             }
 
-//            context?.let { it1 -> TarefasProgressoAdapter(listaTarefasProgresso, it1) }?.removerTarefaProgresso(
-//                ProgressoFragment.listaTarefasProgresso.indexOf(
-//                    Tarefa(
-//                        tituloTarefa.text as String,
-//                        descricaoTarefa.text as String
-//                    )
-//                )
-//            )
-            Toast.makeText(context,"A tarefa foi finalizada",Toast.LENGTH_LONG).show()
+
+            Toast.makeText(context, "A tarefa foi finalizada", Toast.LENGTH_LONG).show()
+            dismiss()
         }
 
-        botaoExcluir.setOnClickListener() {
-            Toast.makeText(context, "clicou", Toast.LENGTH_SHORT).show()
-            //listaTarefasFeitas.remove(Tarefa(tituloTarefa.text as String,descricaoTarefa.text as String))
-        }
 
         botaoEditar.setOnClickListener {
 
@@ -100,11 +86,24 @@ class FinalizarTarefaBottomSheet() : BottomSheetDialogFragment() {
                 TarefasProgressoAdapter(
                     ProgressoFragment.listaTarefasProgresso,
                     it1
-                ).editarTarefaProgresso(tituloTarefa.text as String, descricaoTarefa.text as String)
+                ).editarTarefaProgresso(tituloTarefa.text as String, descricaoTarefa.text as String,posicaoTarefaRecebida)
             }
+            dismiss()
+        }
+
+        botaoExcluir.setOnClickListener {
+
+            //listaTarefasProgresso.remove(Tarefa(tituloTarefa.text as String, descricaoTarefa.text as String))
+            if (posicaoTarefaRecebida != null) {
+                context?.let { it1 -> TarefasProgressoAdapter(ProgressoFragment.listaTarefasProgresso, it1) }
+                    ?.removerTarefaProgresso(
+                        posicaoTarefaRecebida
+                    )
+            }
+            Toast.makeText(context, "A tarefa foi excluída", Toast.LENGTH_SHORT).show()
+            dismiss()
         }
     }
-
 
 
 

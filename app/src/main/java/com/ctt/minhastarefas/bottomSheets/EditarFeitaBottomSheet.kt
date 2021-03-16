@@ -9,7 +9,9 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import com.ctt.minhastarefas.R
+import com.ctt.minhastarefas.adapterListas.TarefasFazerAdapter
 import com.ctt.minhastarefas.adapterListas.TarefasFeitasAdapter
+import com.ctt.minhastarefas.fragments.FazerFragment
 import com.ctt.minhastarefas.fragments.FeitasFragment
 import com.ctt.minhastarefas.fragments.FeitasFragment.Companion.listaTarefasFeitas
 import com.ctt.minhastarefas.model.Tarefa
@@ -43,6 +45,7 @@ class EditarFeitaBottomSheet() : BottomSheetDialogFragment() {
 
         val tituloTarefaRecebido = getArguments()?.getString("TITULO")
         val descricaoTarefaRecebida = getArguments()?.getString("DESCRICAO")
+        val posicaoTarefaRecebida = getArguments()?.getString("POSICAO")?.toInt()
 
         tituloTarefa.setText(tituloTarefaRecebido)
         descricaoTarefa.setText(descricaoTarefaRecebida)
@@ -50,14 +53,21 @@ class EditarFeitaBottomSheet() : BottomSheetDialogFragment() {
 
         botaoSalvar.setOnClickListener {
 
-            context?.let { it1 -> TarefasFeitasAdapter(listaTarefasFeitas, it1) }?.substituirTarefaFeita(
-                FeitasFragment.listaTarefasFeitas.indexOf(
-                    Tarefa(tituloTarefa.text.toString(), descricaoTarefa.text.toString())
-                ), Tarefa(tituloTarefa.text.toString(), descricaoTarefa.text.toString())
+            context?.let { it1 -> TarefasFeitasAdapter(FeitasFragment.listaTarefasFeitas, it1) }?.substituirTarefaFeita(
+                tituloTarefa.text.toString(),descricaoTarefa.text.toString(),posicaoTarefaRecebida.toString()
             )
             Toast.makeText(context, "A tarefa foi alterada", Toast.LENGTH_LONG).show()
+            dismiss()
         }
-    }
+
+//            context?.let { it1 -> TarefasFeitasAdapter(listaTarefasFeitas, it1) }?.substituirTarefaFeita(
+//                FeitasFragment.listaTarefasFeitas.indexOf(
+//                    Tarefa(tituloTarefa.text.toString(), descricaoTarefa.text.toString())
+//                ), Tarefa(tituloTarefa.text.toString(), descricaoTarefa.text.toString())
+//            )
+//            Toast.makeText(context, "A tarefa foi alterada", Toast.LENGTH_LONG).show()
+        }
+
 
 
     override fun onStart() {

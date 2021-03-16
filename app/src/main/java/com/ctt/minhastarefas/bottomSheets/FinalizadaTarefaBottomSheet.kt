@@ -9,8 +9,10 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import com.ctt.minhastarefas.R
+import com.ctt.minhastarefas.adapterListas.TarefasFazerAdapter
 import com.ctt.minhastarefas.adapterListas.TarefasFeitasAdapter
 import com.ctt.minhastarefas.adapterListas.TarefasProgressoAdapter
+import com.ctt.minhastarefas.fragments.FazerFragment
 import com.ctt.minhastarefas.fragments.FeitasFragment
 import com.ctt.minhastarefas.fragments.FeitasFragment.Companion.listaTarefasFeitas
 import com.ctt.minhastarefas.fragments.ProgressoFragment
@@ -51,6 +53,7 @@ class FinalizadaTarefaBottomSheet() : BottomSheetDialogFragment() {
 
         val tituloTarefaRecebido = getArguments()?.getString("TITULO")
         val descricaoTarefaRecebida = getArguments()?.getString("DESCRICAO")
+        val posicaoTarefaRecebida = getArguments()?.getString("POSICAO")?.toInt()
 
         tituloTarefa.text = tituloTarefaRecebido
         descricaoTarefa.text = descricaoTarefaRecebida
@@ -69,14 +72,25 @@ class FinalizadaTarefaBottomSheet() : BottomSheetDialogFragment() {
         }
 
         botaoEditar.setOnClickListener {
-
             context?.let { it1 ->
-                TarefasFeitasAdapter(
-                    FeitasFragment.listaTarefasFeitas,
-                    it1
-                ).editarTarefaFeita(tituloTarefa.text as String, descricaoTarefa.text as String)
+                if (posicaoTarefaRecebida != null) {
+                    TarefasFeitasAdapter(
+                        FeitasFragment.listaTarefasFeitas,
+                        it1
+                    ).editarTarefaFeita(tituloTarefa.text as String, descricaoTarefa.text as String,posicaoTarefaRecebida )
+                }
             }
+            dismiss()
+
         }
+
+//            context?.let { it1 ->
+//                TarefasFeitasAdapter(
+//                    FeitasFragment.listaTarefasFeitas,
+//                    it1
+//                ).editarTarefaFeita(tituloTarefa.text as String, descricaoTarefa.text as String)
+//            }
+//        }
     }
 
     override fun onStart() {

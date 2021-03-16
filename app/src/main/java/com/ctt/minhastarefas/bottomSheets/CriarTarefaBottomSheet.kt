@@ -1,8 +1,6 @@
 package com.ctt.minhastarefas.bottomSheets
 
-import android.app.Activity
 import android.app.Dialog
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,21 +8,12 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.ActivityCompat.startActivityForResult
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentActivity
-import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.ViewModelProviders
 import com.ctt.minhastarefas.R
-import com.ctt.minhastarefas.adapterListas.TarefasFazerAdapter
-import com.ctt.minhastarefas.bottomSheets.FinalizarTarefaBottomSheet.Companion.TAG
-import com.ctt.minhastarefas.fragments.FazerFragment
 import com.ctt.minhastarefas.fragments.FazerFragment.Companion.listaTarefasFazer
 import com.ctt.minhastarefas.model.Tarefa
 import com.ctt.minhastarefas.model.msgViewModel
 import com.google.android.material.bottomsheet.BottomSheetBehavior
-import com.google.android.material.bottomsheet.BottomSheetBehavior.PEEK_HEIGHT_AUTO
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
@@ -76,6 +65,7 @@ class CriarTarefaBottomSheet : BottomSheetDialogFragment() {
                // model.dadosTarefa(Tarefa(titulo,descricao))
                 // context?.let { it1 -> TarefasFazerAdapter(listaTarefasFazer, it1).adicionarTarefa(Tarefa(titulo, descricao)) }
                 Toast.makeText(context, "Tarefa cadastrada!", Toast.LENGTH_SHORT).show()
+                dismiss()
 
                 //onDestroy()
 
@@ -150,5 +140,4 @@ class CriarTarefaBottomSheet : BottomSheetDialogFragment() {
             behavior.halfExpandedRatio = 0.90F
         }
     }
-
 }

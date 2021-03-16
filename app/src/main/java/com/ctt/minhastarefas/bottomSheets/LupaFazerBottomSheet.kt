@@ -72,7 +72,8 @@ class LupaFazerBottomSheet : BottomSheetDialogFragment() {
                                 "BottomSheetVisualizar"
                             )
                         } else {
-                            Toast.makeText(context, "Essa tarefa não está na lista!", Toast.LENGTH_SHORT).show()
+                           // Toast.makeText(context, "Essa tarefa não está na lista!", Toast.LENGTH_SHORT).show()
+
                         }
                     }
                 }
