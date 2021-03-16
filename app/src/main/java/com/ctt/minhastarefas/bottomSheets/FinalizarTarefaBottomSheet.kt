@@ -63,6 +63,7 @@ class FinalizarTarefaBottomSheet() : BottomSheetDialogFragment() {
 
         val tituloTarefaRecebido = getArguments()?.getString("TITULO")
         val descricaoTarefaRecebida = getArguments()?.getString("DESCRICAO")
+        val posicaoTarefaRecebida = getArguments()?.getString("POSICAO")?.toInt()
 
         tituloTarefa.text = tituloTarefaRecebido
         descricaoTarefa.text = descricaoTarefaRecebida
@@ -72,14 +73,19 @@ class FinalizarTarefaBottomSheet() : BottomSheetDialogFragment() {
             model!!.notificar("Tarefa finalizar")
             listaTarefasFeitas.add(Tarefa(tituloTarefa.text as String, descricaoTarefa.text as String))
 
-            context?.let { it1 -> TarefasProgressoAdapter(listaTarefasProgresso, it1) }?.removerTarefaProgresso(
-                ProgressoFragment.listaTarefasProgresso.indexOf(
-                    Tarefa(
-                        tituloTarefa.text as String,
-                        descricaoTarefa.text as String
-                    )
-                )
-            )
+            if (posicaoTarefaRecebida != null) {
+                context?.let { it1 -> TarefasProgressoAdapter(ProgressoFragment.listaTarefasProgresso, it1) }?.removerTarefaProgresso(
+                    posicaoTarefaRecebida)
+            }
+
+//            context?.let { it1 -> TarefasProgressoAdapter(listaTarefasProgresso, it1) }?.removerTarefaProgresso(
+//                ProgressoFragment.listaTarefasProgresso.indexOf(
+//                    Tarefa(
+//                        tituloTarefa.text as String,
+//                        descricaoTarefa.text as String
+//                    )
+//                )
+//            )
             Toast.makeText(context,"A tarefa foi finalizada",Toast.LENGTH_LONG).show()
         }
 

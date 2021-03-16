@@ -37,11 +37,14 @@ class FinalizadaTarefaBottomSheet() : BottomSheetDialogFragment() {
 
         val contextoFinalizada = inflater.inflate(R.layout.bottom_sheet_tarefa_finalizada, container, false)
         botaoExcluir = contextoFinalizada.findViewById(R.id.btnExcluirTarefa)
+        botaoEditar = contextoFinalizada.findViewById(R.id.btnEditarFinalizada)
         return contextoFinalizada
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+
 
         val tituloTarefa = view.findViewById<TextView>(R.id.txtTituloExcluir)
         val descricaoTarefa = view.findViewById<TextView>(R.id.txtDescricaoExcluir)

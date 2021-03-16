@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.ctt.minhastarefas.R
@@ -37,6 +38,8 @@ class TarefasFazerAdapter(private val listaTarefasFazer: MutableList<Tarefa>, pr
             val bundle = Bundle()
             bundle.putString("TITULO", listaTarefasFazer[position].nomeTarefa)
             bundle.putString("DESCRICAO", listaTarefasFazer[position].descricaoTarefa)
+            bundle.putString("POSICAO", position.toString())
+            Toast.makeText(it.context,position.toString(),Toast.LENGTH_SHORT).show()
             bottomSheetVisualizar.setArguments(bundle)
             bottomSheetVisualizar.show((contexto as AppCompatActivity).supportFragmentManager,"BottomSheetVisualizar")
         }
@@ -61,14 +64,14 @@ class TarefasFazerAdapter(private val listaTarefasFazer: MutableList<Tarefa>, pr
 
     fun substituirTarefaFazer(position: Int,tarefa: Tarefa) {
 
-        listaTarefasFazer.set(position + 1,tarefa)
+        listaTarefasFazer.set(position,tarefa)
         notifyDataSetChanged()
         //listaTarefasFazer.clear()
     }
 
     fun removerTarefaFazer(position: Int) {
 
-        listaTarefasFazer.removeAt(position + 1)
+        listaTarefasFazer.removeAt(position)
         notifyDataSetChanged()
         //listaTarefasFazer.clear()
     }

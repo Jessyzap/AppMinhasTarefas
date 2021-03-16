@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.ctt.minhastarefas.R
@@ -38,6 +39,8 @@ class TarefasFeitasAdapter(private val listaTarefasFeitas: MutableList<Tarefa>, 
             val bundle = Bundle()
             bundle.putString("TITULO", listaTarefasFeitas[position].nomeTarefa)
             bundle.putString("DESCRICAO", listaTarefasFeitas[position].descricaoTarefa)
+            bundle.putString("POSICAO", position.toString())
+            Toast.makeText(it.context,position.toString(), Toast.LENGTH_SHORT).show()
             bottomSheetFinalizada.setArguments(bundle)
             bottomSheetFinalizada.show((contexto as AppCompatActivity).supportFragmentManager,"FinalizadaTarefaBottomSheet"
             )
@@ -59,7 +62,7 @@ class TarefasFeitasAdapter(private val listaTarefasFeitas: MutableList<Tarefa>, 
 
 
     fun substituirTarefaFeita(position: Int,tarefa: Tarefa) {
-        listaTarefasFeitas.set(position + 1,tarefa)
+        listaTarefasFeitas.set(position,tarefa)
         notifyDataSetChanged()
         //listaTarefasFazer.clear()
     }

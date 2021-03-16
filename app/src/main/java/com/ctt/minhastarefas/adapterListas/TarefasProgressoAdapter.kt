@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.ctt.minhastarefas.R
@@ -37,6 +38,8 @@ class TarefasProgressoAdapter(private val listaTarefasProgresso: MutableList<Tar
             val bundle = Bundle()
             bundle.putString("TITULO", listaTarefasProgresso[position].nomeTarefa)
             bundle.putString("DESCRICAO", listaTarefasProgresso[position].descricaoTarefa)
+            bundle.putString("POSICAO", position.toString())
+            Toast.makeText(it.context,position.toString(), Toast.LENGTH_SHORT).show()
             bottomSheetProgresso.setArguments(bundle)
             bottomSheetProgresso.show((contexto as AppCompatActivity).supportFragmentManager, "BottomSheetProgresso")
         }
@@ -60,13 +63,13 @@ class TarefasProgressoAdapter(private val listaTarefasProgresso: MutableList<Tar
     }
 
     fun substituirTarefaProgresso(position: Int,tarefa: Tarefa) {
-        listaTarefasProgresso.set(position + 1,tarefa)
+        listaTarefasProgresso.set(position,tarefa)
         notifyDataSetChanged()
         //listaTarefasFazer.clear()
     }
 
     fun removerTarefaProgresso(position: Int) {
-        listaTarefasProgresso.removeAt(position + 1)
+        listaTarefasProgresso.removeAt(position)
         notifyDataSetChanged()
         //ListaTarefasActivity.listaCompanion.removeAll(listaTarefasFazerRemover)
        // listaTarefasProgresso.clear()

@@ -63,6 +63,7 @@ class VisualizarTarefaBottomSheet() : BottomSheetDialogFragment() {
 
         val tituloTarefaRecebido = getArguments()?.getString("TITULO")
         val descricaoTarefaRecebida = getArguments()?.getString("DESCRICAO")
+        val posicaoTarefaRecebida = getArguments()?.getString("POSICAO")?.toInt()
 
         tituloTarefa.text = tituloTarefaRecebido
         descricaoTarefa.text = descricaoTarefaRecebida
@@ -72,15 +73,21 @@ class VisualizarTarefaBottomSheet() : BottomSheetDialogFragment() {
             model!!.notificar("Tarefa iniciada")
             listaTarefasProgresso.add(Tarefa(tituloTarefa.text as String, descricaoTarefa.text as String))
 
-            context?.let { it1 -> TarefasFazerAdapter(FazerFragment.listaTarefasFazer, it1) }?.removerTarefaFazer(
-                FeitasFragment.listaTarefasFeitas.indexOf(
-                    Tarefa(
-                        tituloTarefa.text as String,
-                        descricaoTarefa.text as String
-                    )
-                )
-            )
-            Toast.makeText(context, "A tarefa foi iniciada", Toast.LENGTH_SHORT).show()
+            if (posicaoTarefaRecebida != null) {
+                context?.let { it1 -> TarefasFazerAdapter(FazerFragment.listaTarefasFazer, it1) }?.removerTarefaFazer(
+                    posicaoTarefaRecebida)
+            }
+
+//            context?.let { it1 -> TarefasFazerAdapter(FazerFragment.listaTarefasFazer, it1) }?.removerTarefaFazer(
+//                FeitasFragment.listaTarefasFeitas.indexOf(
+//                    Tarefa(
+//                        tituloTarefa.text as String,
+//                        descricaoTarefa.text as String
+//                    )
+//                )
+//            )
+                        Toast . makeText (context, "A tarefa foi iniciada", Toast.LENGTH_SHORT
+            ).show()
         }
 
 
