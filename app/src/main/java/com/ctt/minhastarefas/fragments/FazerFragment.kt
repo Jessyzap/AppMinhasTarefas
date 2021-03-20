@@ -1,11 +1,13 @@
 package com.ctt.minhastarefas.fragments
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.*
+import android.widget.Button
+import android.widget.ImageView
+import android.widget.TextView
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -23,7 +25,6 @@ class FazerFragment : Fragment() {
     private lateinit var imagemFazerVazia: ImageView
     private lateinit var textoFazerVazia: TextView
     private lateinit var segundoTextoFazerVazia: TextView
-
     private lateinit var botao: Button
     private lateinit var botaoLupaFazer: Button
 
@@ -49,10 +50,7 @@ class FazerFragment : Fragment() {
         botao = contextoFazer.findViewById(R.id.btnAdicionar)
         botaoLupaFazer = contextoFazer.findViewById(R.id.btnLupaFazer)
         return contextoFazer
-
-       // return inflater.inflate(R.layout.fragment_fazer, container, false)
     }
-
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -61,21 +59,24 @@ class FazerFragment : Fragment() {
         textoFazerVazia = view.findViewById(R.id.txtFazerVazia)
         segundoTextoFazerVazia = view.findViewById(R.id.txt2FazerVazia)
 
+
         val botao = view.findViewById<Button>(R.id.btnAdicionar)
 
 
         val bottomSheetCriar = CriarTarefaBottomSheet()
         val bottomSheetLupaFazer = LupaFazerBottomSheet()
 
-        botao.setOnClickListener {
 
+        // Abrir bottom sheet para criar a tarefa
+        botao.setOnClickListener {
             fragmentManager?.let { it1 ->
                 bottomSheetCriar.show(it1, "CriarTarefaBottomSheet")
             }
         }
 
-        botaoLupaFazer.setOnClickListener {
 
+        // Pesquisar por tarefas a fazer
+        botaoLupaFazer.setOnClickListener {
             fragmentManager?.let { it1 ->
                 bottomSheetLupaFazer.show(it1, "LupaFazerBottomSheet")
             }

@@ -9,11 +9,15 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.ViewModelProviders
 import com.ctt.minhastarefas.R
+import com.ctt.minhastarefas.adapterListas.TarefasFeitasAdapter
 import com.ctt.minhastarefas.adapterListas.TarefasProgressoAdapter
+import com.ctt.minhastarefas.fragments.FeitasFragment
 import com.ctt.minhastarefas.fragments.FeitasFragment.Companion.listaTarefasFeitas
 import com.ctt.minhastarefas.fragments.ProgressoFragment
+import com.ctt.minhastarefas.fragments.ProgressoFragment.Companion.listaTarefasProgresso
 import com.ctt.minhastarefas.model.Tarefa
 import com.ctt.minhastarefas.model.msgViewModel
 import com.google.android.material.bottomsheet.BottomSheetBehavior
@@ -62,18 +66,27 @@ class FinalizarTarefaBottomSheet() : BottomSheetDialogFragment() {
         tituloTarefa.text = tituloTarefaRecebido
         descricaoTarefa.text = descricaoTarefaRecebida
 
-        // adicionar na lista feitas
+
         botaoFinalizar.setOnClickListener {
             model!!.notificar("Tarefa finalizar")
-            listaTarefasFeitas.add(Tarefa(tituloTarefa.text as String, descricaoTarefa.text as String))
+
+
+            context?.let { it1 -> TarefasFeitasAdapter(listaTarefasFeitas, it1).adicionarTarefaFeita(Tarefa(tituloTarefa.text as String,descricaoTarefa.text as String)) }
+
+
+            val transicao: FragmentTransaction = getFragmentManager()!!.beginTransaction()
+            transicao.replace(R.id.frFeitas, FeitasFragment())
+            transicao.commit()
 
             if (posicaoTarefaRecebida != null) {
                 context?.let { it1 -> TarefasProgressoAdapter(ProgressoFragment.listaTarefasProgresso, it1) }
                     ?.removerTarefaProgresso(
                         posicaoTarefaRecebida
                     )
+                val transicaoProgresso: FragmentTransaction = getFragmentManager()!!.beginTransaction()
+                transicaoProgresso.replace(R.id.frProgresso, ProgressoFragment())
+                transicaoProgresso.commit()
             }
-
 
             Toast.makeText(context, "A tarefa foi finalizada", Toast.LENGTH_LONG).show()
             dismiss()
@@ -83,28 +96,34 @@ class FinalizarTarefaBottomSheet() : BottomSheetDialogFragment() {
         botaoEditar.setOnClickListener {
 
             context?.let { it1 ->
-                TarefasProgressoAdapter(
-                    ProgressoFragment.listaTarefasProgresso,
-                    it1
-                ).editarTarefaProgresso(tituloTarefa.text as String, descricaoTarefa.text as String,posicaoTarefaRecebida)
+                if (posicaoTarefaRecebida != null) {
+                    TarefasProgressoAdapter(
+                        listaTarefasProgresso,
+                        it1
+                    ).editarTarefaProgresso(tituloTarefa.text as String, descricaoTarefa.text as String,posicaoTarefaRecebida )
+                }
             }
             dismiss()
         }
 
+
         botaoExcluir.setOnClickListener {
 
-            //listaTarefasProgresso.remove(Tarefa(tituloTarefa.text as String, descricaoTarefa.text as String))
             if (posicaoTarefaRecebida != null) {
                 context?.let { it1 -> TarefasProgressoAdapter(ProgressoFragment.listaTarefasProgresso, it1) }
                     ?.removerTarefaProgresso(
                         posicaoTarefaRecebida
                     )
             }
+
+            val transicao: FragmentTransaction = getFragmentManager()!!.beginTransaction()
+            transicao.replace(R.id.frProgresso, ProgressoFragment())
+            transicao.commit()
+
             Toast.makeText(context, "A tarefa foi excluída", Toast.LENGTH_SHORT).show()
             dismiss()
         }
     }
-
 
 
     override fun onStart() {

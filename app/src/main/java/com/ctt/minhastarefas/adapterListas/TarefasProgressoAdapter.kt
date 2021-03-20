@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.ctt.minhastarefas.R
@@ -16,6 +15,7 @@ import com.ctt.minhastarefas.model.Tarefa
 
 class TarefasProgressoAdapter(private val listaTarefasProgresso: MutableList<Tarefa>, private val contexto: Context) :
     RecyclerView.Adapter<TarefasProgressoAdapter.TarefaProgressoHolder>() {
+
 
     class TarefaProgressoHolder(view: View) : RecyclerView.ViewHolder(view) {
 
@@ -46,12 +46,8 @@ class TarefasProgressoAdapter(private val listaTarefasProgresso: MutableList<Tar
 
     override fun getItemCount(): Int = listaTarefasProgresso.size
 
-//    fun adicionarTarefa(tarefa: Tarefa) {
-//        listaTarefasProgresso.add(tarefa)
-//        notifyDataSetChanged()
-//    }
 
-    fun editarTarefaProgresso(titulo: String, descricao: String, posicao: Int?){
+    fun editarTarefaProgresso(titulo: String, descricao: String,posicao: Int){
 
         val bottomSheetEditar = EditarProgressoBottomSheet()
         val bundle = Bundle()
@@ -65,13 +61,15 @@ class TarefasProgressoAdapter(private val listaTarefasProgresso: MutableList<Tar
     fun substituirTarefaProgresso(tituloProgresso: String, descricaoProgresso: String, posicaoProgresso: String) {
         listaTarefasProgresso.set(posicaoProgresso.toInt(),Tarefa(tituloProgresso,descricaoProgresso))
         notifyDataSetChanged()
-        //listaTarefasFazer.clear()
+    }
+
+    fun adicionarTarefaProgresso(tarefa: Tarefa) {
+        listaTarefasProgresso.add(tarefa)
+        notifyDataSetChanged()
     }
 
     fun removerTarefaProgresso(position: Int) {
         listaTarefasProgresso.removeAt(position)
         notifyDataSetChanged()
-        //ListaTarefasActivity.listaCompanion.removeAll(listaTarefasFazerRemover)
-       // listaTarefasProgresso.clear()
     }
 }

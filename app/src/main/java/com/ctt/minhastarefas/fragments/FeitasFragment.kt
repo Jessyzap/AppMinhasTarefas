@@ -23,6 +23,7 @@ class FeitasFragment : Fragment() {
     private lateinit var textoFeitasVazia: TextView
     private lateinit var segundoTextoFeitasVazia: TextView
 
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?

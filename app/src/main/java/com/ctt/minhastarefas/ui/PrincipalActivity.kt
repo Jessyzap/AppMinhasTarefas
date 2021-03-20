@@ -1,7 +1,8 @@
 package com.ctt.minhastarefas.ui
 
-import androidx.appcompat.app.AppCompatActivity
+import android.content.Intent
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager.widget.ViewPager
 import com.ctt.minhastarefas.R
 import com.google.android.material.tabs.TabLayout
@@ -21,9 +22,12 @@ class PrincipalActivity : AppCompatActivity() {
         tabLayout.setupWithViewPager(viewPager)
     }
 
-//    override fun onBackPressed() {
-//        //Toast.makeText(this, "Tchauuuu", Toast.LENGTH_SHORT)
-//        SaidaActivity()
-//        super.onBackPressed()
-//    }
+    // animacao
+    override fun onPause(){
+        super.onPause()
+
+        val saida = Intent(this, SaidaActivity::class.java)
+        startActivity(saida)
+        finish()
+    }
 }

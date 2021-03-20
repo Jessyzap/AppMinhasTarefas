@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.ctt.minhastarefas.R
@@ -16,6 +15,7 @@ import com.ctt.minhastarefas.model.Tarefa
 
 class TarefasFazerAdapter(private val listaTarefasFazer: MutableList<Tarefa>, private val contexto: Context) :
     RecyclerView.Adapter<TarefasFazerAdapter.TarefaHolder>() {
+
 
     class TarefaHolder(view: View) : RecyclerView.ViewHolder(view) {
 
@@ -46,10 +46,6 @@ class TarefasFazerAdapter(private val listaTarefasFazer: MutableList<Tarefa>, pr
 
     override fun getItemCount(): Int = listaTarefasFazer.size
 
-    //fun adicionarTarefa(tarefa: Tarefa){
-     //   listaTarefasFazer.add(tarefa)
-    //    notifyDataSetChanged()
-//    }
 
     fun editarTarefaFazer(titulo: String, descricao: String,posicao: Int){
 
@@ -66,20 +62,16 @@ class TarefasFazerAdapter(private val listaTarefasFazer: MutableList<Tarefa>, pr
 
         listaTarefasFazer.set(posicaoFazer.toInt(),Tarefa(tituloFazer,descricaoFazer))
         notifyDataSetChanged()
-        //listaTarefasFazer.clear()
     }
 
-//    fun substituirTarefaFazer(position: Int,tarefa: Tarefa) {
-//
-//        listaTarefasFazer.set(position,tarefa)
-//        notifyDataSetChanged()
-//        //listaTarefasFazer.clear()
-//    }
+    fun adicionarTarefaFazer(tarefa: Tarefa) {
+        listaTarefasFazer.add(tarefa)
+        notifyDataSetChanged()
+    }
 
     fun removerTarefaFazer(position: Int) {
 
         listaTarefasFazer.removeAt(position)
         notifyDataSetChanged()
-        //listaTarefasFazer.clear()
     }
 }

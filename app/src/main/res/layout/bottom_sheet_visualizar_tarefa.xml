@@ -26,7 +26,7 @@
                 android:maxHeight="20dp"
                 android:maxWidth="20dp"
                 android:layout_width="30dp"
-                android:layout_height="wrap_content"
+                android:layout_height="30dp"
                 android:layout_marginTop="55dp"
                 android:layout_marginStart="280dp"
                 android:src="@drawable/ic_editar"

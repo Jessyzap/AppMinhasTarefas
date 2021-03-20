@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.ctt.minhastarefas.R
@@ -60,18 +59,18 @@ class TarefasFeitasAdapter(private val listaTarefasFeitas: MutableList<Tarefa>, 
         bottomSheetEditar.show((contexto as AppCompatActivity).supportFragmentManager,"")
     }
 
-
     fun substituirTarefaFeita(tituloFeita: String, descricaoFeita: String, posicaoFeita: String) {
         listaTarefasFeitas.set(posicaoFeita.toInt(),Tarefa(tituloFeita,descricaoFeita))
         notifyDataSetChanged()
-        //listaTarefasFazer.clear()
     }
 
+    fun adicionarTarefaFeita(tarefa: Tarefa) {
+        listaTarefasFeitas.add(tarefa)
+        notifyDataSetChanged()
+    }
 
-    fun removerTarefaFeitas(position: Int) {
-
+    fun removerTarefaFeita(position: Int) {
         listaTarefasFeitas.removeAt(position )
         notifyDataSetChanged()
-        listaTarefasFeitas.clear()
     }
 }

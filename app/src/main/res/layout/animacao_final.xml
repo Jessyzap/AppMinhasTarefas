@@ -7,6 +7,7 @@
         android:background="#FFFFFF">
 
     <TextView
+            android:layout_marginTop="100dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Até logo!"
@@ -15,9 +16,11 @@
             android:layout_marginBottom="50dp"
             app:layout_constraintBottom_toTopOf="@+id/animationTravel"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
 
     <com.airbnb.lottie.LottieAnimationView
+            android:layout_marginTop="80dp"
             android:id="@+id/animationTravel"
             android:layout_height="300dp"
             android:layout_width="300dp"
@@ -27,6 +30,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"/>
+            app:layout_constraintBottom_toBottomOf="parent"
+            />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

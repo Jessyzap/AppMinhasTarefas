@@ -14,5 +14,4 @@ class msgViewModel : ViewModel() {
     fun notificar(texto: String) {
         textoNotificacao.value = texto
     }
-
 }

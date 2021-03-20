@@ -1,6 +1,8 @@
 package com.ctt.minhastarefas.bottomSheets
 
 import android.app.Dialog
+import android.content.Context
+import android.content.DialogInterface
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,16 +10,23 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentTransaction
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelProviders
 import com.ctt.minhastarefas.R
+import com.ctt.minhastarefas.adapterListas.TarefasFazerAdapter
+import com.ctt.minhastarefas.fragments.FazerFragment
 import com.ctt.minhastarefas.fragments.FazerFragment.Companion.listaTarefasFazer
+import com.ctt.minhastarefas.fragments.ProgressoFragment
 import com.ctt.minhastarefas.model.Tarefa
 import com.ctt.minhastarefas.model.msgViewModel
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import java.lang.ClassCastException
 
-class CriarTarefaBottomSheet : BottomSheetDialogFragment() {
+class CriarTarefaBottomSheet : BottomSheetDialogFragment(){
 
     private lateinit var nomeTarefa: EditText
     private lateinit var descricaoTarefa: EditText
@@ -35,8 +44,12 @@ class CriarTarefaBottomSheet : BottomSheetDialogFragment() {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.bottom_sheet_criar_tarefa, container, false)
+        val contextoCriar = inflater.inflate(R.layout.bottom_sheet_criar_tarefa, container, false)
+
+        botaoCriarTarefa = contextoCriar.findViewById(R.id.btnCriarTarefa)
+        return contextoCriar
     }
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -47,6 +60,7 @@ class CriarTarefaBottomSheet : BottomSheetDialogFragment() {
         descricaoTarefa = view.findViewById(R.id.txtDescricaoCriarTarefa)
         botaoCriarTarefa = view.findViewById(R.id.btnCriarTarefa)
 
+
         botaoCriarTarefa.setOnClickListener {
 
             val titulo = nomeTarefa.text.toString()
@@ -56,76 +70,19 @@ class CriarTarefaBottomSheet : BottomSheetDialogFragment() {
                 nomeTarefa.error = "Insira um título para a sua tarefa"
             } else {
 
+                context?.let { it1 -> TarefasFazerAdapter(listaTarefasFazer, it1).adicionarTarefaFazer(Tarefa(titulo,descricao)) }
 
-                //  context?.let { it1 -> TarefasFazerAdapter(listaTarefasFazer, it1).adicionarTarefa(Tarefa(titulo,descricao)) }
-                listaTarefasFazer.add(Tarefa(titulo, descricao))
+                val transicao: FragmentTransaction = getFragmentManager()!!.beginTransaction()
+                transicao.replace(R.id.frFazer, FazerFragment())
+                transicao.commit()
+
                 model.notificar("Tarefa Criar")
 
-
-               // model.dadosTarefa(Tarefa(titulo,descricao))
-                // context?.let { it1 -> TarefasFazerAdapter(listaTarefasFazer, it1).adicionarTarefa(Tarefa(titulo, descricao)) }
                 Toast.makeText(context, "Tarefa cadastrada!", Toast.LENGTH_SHORT).show()
                 dismiss()
-
-                //onDestroy()
-
-//                FragmentActivity.startActivityFromFragment()
-//                Fragment.startActivityForResult()
-//                Activity.startActivityFromFragment()
-//                startActivity()
-
-//                var intent = Intent(getActivity(), FazerFragment.class)
-//                startActivity(intent)
-
-
-//
-            //                listaTarefasFazer.add(Tarefa(titulo, descricao))
-//
-//                val bottomSheetVisualizar = FragmentFazer
-//                val bundle = Bundle()
-//                bottomSheetVisualizar.setArguments(bundle)
-//                bottomSheetVisualizar.show((context as AppCompatActivity).supportFragmentManager,"")
-
-
-                //inflar fragment
-
-
-//                btnBottomSheetModal.setOnClickListener {
-//                    CustomBottomSheetDialogFragment().apply {
-//                        show(supportFragmentManager, CustomBottomSheetDialogFragment.TAG)
-
-
-//                        BottomSheetDialog(requireContext(), theme).apply {
-//                            fragmentManager?.let { it1 -> show(it1, FazerFragment.TAG) }
-//                        }
-//
-//                bottomSheetFragment.dismiss()
-//                bottomSheetFragment.show(getSupportFragmentManager(), TAG)
-//
-//               val  sheetDialog = context?.let { it1 -> BottomSheetDialog(it1) };
-//                sheetDialog.setContentView(viewBottom);
-
-
-               //val  fragment = FazerFragment()
-                //val viewDialog = fragment.view
-
-//                val contentView = View.inflate(context, R.layout.fragment_fazer, null)
-//                dialog!!.setContentView(contentView)
-
-
-
-
-//                val contentView = View.inflate(context, R.layout.fragment_station_detail, null)
-//                dialog!!.setContentView(contentView)
-
-
-
-
-                //dismiss()
             }
         }
     }
-
 
 
     override fun onStart() {
