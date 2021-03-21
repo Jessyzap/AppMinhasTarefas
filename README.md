@@ -16,3 +16,4 @@
 - RecyclerView
 - Bottom Sheets
 
+![tarefasa](https://user-images.githubusercontent.com/72326674/111918532-4261cb00-8a64-11eb-8beb-2d94f0a05178.gif)
