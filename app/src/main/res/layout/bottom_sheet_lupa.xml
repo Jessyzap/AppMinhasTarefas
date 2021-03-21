@@ -16,6 +16,7 @@
             android:src="@drawable/shape_detalhe_bottom_sheet"/>
 
     <TextView
+            android:id="@+id/tituloProvisorio"
             android:textColor="@color/colorTitulo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -27,6 +28,7 @@
     <EditText
             android:id="@+id/txtProcurarTituloTarefa"
             android:paddingStart="10dp"
+            android:inputType="textCapSentences"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:hint="Título da tarefa"
@@ -36,7 +38,7 @@
             android:layout_marginTop="30dp"/>
 
     <Button
-            android:id="@+id/btnProcurarFazer"
+            android:id="@+id/btnProcurar"
             android:textSize="16sp"
             android:textColor="#FFFFFF"
             android:layout_marginTop="70dp"

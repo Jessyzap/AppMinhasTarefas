@@ -11,19 +11,19 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.ctt.minhastarefas.R
-import com.ctt.minhastarefas.fragments.FazerFragment.Companion.listaTarefasFazer
+import com.ctt.minhastarefas.fragments.ProgressoFragment.Companion.listaTarefasProgresso
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
-class LupaFazerBottomSheet : BottomSheetDialogFragment() {
+class LupaProgressoBottomSheet : BottomSheetDialogFragment() {
 
-    private lateinit var botaoProcurarFazer: Button
+    private lateinit var botaoProcurarProgresso: Button
     private lateinit var nomeTarefa: EditText
     private lateinit var tituloProvisorio: TextView
 
     companion object {
-        const val TAG = "LupaFazerBottomSheet"
+        const val TAG = "LupaProgressoBottomSheet"
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -33,9 +33,9 @@ class LupaFazerBottomSheet : BottomSheetDialogFragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
-        val contextoPesquisarFazer = inflater.inflate(R.layout.bottom_sheet_lupa, container, false)
-        botaoProcurarFazer = contextoPesquisarFazer.findViewById(R.id.btnProcurar)
-        return contextoPesquisarFazer
+        val contextoPesquisarProgresso = inflater.inflate(R.layout.bottom_sheet_lupa, container, false)
+        botaoProcurarProgresso = contextoPesquisarProgresso.findViewById(R.id.btnProcurar)
+        return contextoPesquisarProgresso
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -44,10 +44,10 @@ class LupaFazerBottomSheet : BottomSheetDialogFragment() {
         nomeTarefa = view.findViewById(R.id.txtProcurarTituloTarefa)
         tituloProvisorio = view.findViewById(R.id.tituloProvisorio)
 
-        tituloProvisorio.text = "Procurar por tarefas a fazer"
+        tituloProvisorio.text = "Procurar por tarefas em progresso"
 
 
-        botaoProcurarFazer.setOnClickListener {
+        botaoProcurarProgresso.setOnClickListener {
 
             val titulo = nomeTarefa.text.toString()
 
@@ -55,26 +55,26 @@ class LupaFazerBottomSheet : BottomSheetDialogFragment() {
                 titulo == "" -> {
                     nomeTarefa.error = "Insira um título para pesquisar"
                 }
-                listaTarefasFazer.isEmpty() -> {
+                listaTarefasProgresso.isEmpty() -> {
                     Toast.makeText(context, "A sua lista está vazia!", Toast.LENGTH_SHORT).show()
                 }
-                listaTarefasFazer.isNotEmpty() -> {
-                    for (tarefa in listaTarefasFazer) {
+                listaTarefasProgresso.isNotEmpty() -> {
+                    for (tarefa in listaTarefasProgresso) {
 
                         if (titulo in tarefa.nomeTarefa) {
 
-                            val indice = listaTarefasFazer.indexOf(tarefa)
+                            val indice = listaTarefasProgresso.indexOf(tarefa)
 
                             // abrir bottom sheet
-                            val bottomSheetVisualizar = VisualizarTarefaBottomSheet()
+                            val bottomSheetFinalizar = FinalizarTarefaBottomSheet()
                             val bundle = Bundle()
                             bundle.putString("TITULO", tarefa.nomeTarefa)
                             bundle.putString("DESCRICAO", tarefa.descricaoTarefa)
                             bundle.putString("POSICAO", indice.toString())
-                            bottomSheetVisualizar.setArguments(bundle)
-                            bottomSheetVisualizar.show(
+                            bottomSheetFinalizar.setArguments(bundle)
+                            bottomSheetFinalizar.show(
                                 (context as AppCompatActivity).supportFragmentManager,
-                                "BottomSheetVisualizar"
+                                "BottomSheetFinalizar"
                             )
                             nomeTarefa.text.clear()
                             dismiss()

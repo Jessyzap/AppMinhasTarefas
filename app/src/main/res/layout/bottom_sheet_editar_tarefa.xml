@@ -56,10 +56,11 @@
                 android:textSize="16sp"/>
     </FrameLayout>
 
-
     <EditText
             android:id="@+id/edtTituloEditar"
             android:paddingStart="10dp"
+            android:inputType="textCapSentences"
+            android:maxLength="25"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:hint="Título da tarefa"
@@ -71,6 +72,7 @@
     <EditText
             android:id="@+id/edtDescricaoEditar"
             android:paddingBottom="105dp"
+            android:inputType="textCapSentences"
             android:paddingStart="10dp"
             android:layout_width="match_parent"
             android:layout_height="150dp"

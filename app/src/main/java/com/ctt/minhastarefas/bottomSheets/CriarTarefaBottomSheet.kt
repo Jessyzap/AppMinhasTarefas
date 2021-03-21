@@ -79,6 +79,11 @@ class CriarTarefaBottomSheet : BottomSheetDialogFragment(){
                 model.notificar("Tarefa Criar")
 
                 Toast.makeText(context, "Tarefa cadastrada!", Toast.LENGTH_SHORT).show()
+
+                nomeTarefa.text.clear()
+                descricaoTarefa.text.clear()
+                nomeTarefa.requestFocus()
+
                 dismiss()
             }
         }
