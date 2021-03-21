@@ -8,7 +8,7 @@
         android:layout_height="match_parent"
         android:background="#ECECEC"
         android:id="@+id/principal"
-        tools:context=".ui.PrincipalActivity">
+        tools:context=".ui.activity.PrincipalActivity">
 
       <androidx.viewpager.widget.ViewPager
               android:id="@+id/viewPager"
@@ -44,7 +44,7 @@
                 android:fontFamily="sans-serif"
                 android:layout_marginTop="15dp"
                 android:layout_marginBottom="26dp"
-                android:layout_marginLeft="15dp"
+                android:layout_marginStart="15dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/tarefas_titulo"

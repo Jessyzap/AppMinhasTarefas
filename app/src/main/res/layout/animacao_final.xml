@@ -10,7 +10,7 @@
             android:layout_marginTop="100dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Até logo!"
+            android:text="@string/ate_logo"
             android:textColor="@color/colorLogoText"
             android:textSize="34sp"
             android:layout_marginBottom="50dp"

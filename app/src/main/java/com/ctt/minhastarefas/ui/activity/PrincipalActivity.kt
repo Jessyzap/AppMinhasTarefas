@@ -1,10 +1,11 @@
-package com.ctt.minhastarefas.ui
+package com.ctt.minhastarefas.ui.activity
 
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager.widget.ViewPager
 import com.ctt.minhastarefas.R
+import com.ctt.minhastarefas.ui.PagerAdapter
 import com.google.android.material.tabs.TabLayout
 
 
@@ -24,7 +25,7 @@ class PrincipalActivity : AppCompatActivity() {
 
     // animacao
     override fun onPause(){
-        super.onPause()
+        super.onStop()
 
         val saida = Intent(this, SaidaActivity::class.java)
         startActivity(saida)

@@ -1,4 +1,4 @@
-package com.ctt.minhastarefas.bottomSheets
+package com.ctt.minhastarefas.ui.bottomSheets
 
 import android.app.Dialog
 import android.os.Bundle
@@ -11,8 +11,7 @@ import android.widget.Toast
 import androidx.fragment.app.FragmentTransaction
 import com.ctt.minhastarefas.R
 import com.ctt.minhastarefas.adapterListas.TarefasFeitasAdapter
-import com.ctt.minhastarefas.fragments.FeitasFragment
-import com.ctt.minhastarefas.fragments.ProgressoFragment
+import com.ctt.minhastarefas.ui.fragments.FeitasFragment
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment

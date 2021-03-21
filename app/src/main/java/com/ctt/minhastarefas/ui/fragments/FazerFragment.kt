@@ -1,4 +1,4 @@
-package com.ctt.minhastarefas.fragments
+package com.ctt.minhastarefas.ui.fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,20 +8,16 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.ctt.minhastarefas.R
 import com.ctt.minhastarefas.adapterListas.TarefasFazerAdapter
-import com.ctt.minhastarefas.bottomSheets.CriarTarefaBottomSheet
-import com.ctt.minhastarefas.bottomSheets.LupaFazerBottomSheet
+import com.ctt.minhastarefas.ui.bottomSheets.CriarTarefaBottomSheet
+import com.ctt.minhastarefas.ui.bottomSheets.LupaFazerBottomSheet
 import com.ctt.minhastarefas.model.Tarefa
-import com.ctt.minhastarefas.model.msgViewModel
 
 class FazerFragment : Fragment() {
 
-    private var model: msgViewModel? = null
     private lateinit var imagemFazerVazia: ImageView
     private lateinit var textoFazerVazia: TextView
     private lateinit var segundoTextoFazerVazia: TextView
@@ -34,18 +30,6 @@ class FazerFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-       model = ViewModelProviders.of(activity!!).get(msgViewModel::class.java)
-
-        model!!.textoNotificacao.observe(viewLifecycleOwner, object : Observer<String> {
-            override fun onChanged(texto: String) {
-                if (texto != ""){
-                    imagemFazerVazia.visibility = View.GONE
-                    textoFazerVazia.visibility = View.GONE
-                    segundoTextoFazerVazia.visibility = View.GONE
-                }
-            }
-        })
-
         val contextoFazer = inflater.inflate(R.layout.fragment_fazer, container, false)
         botao = contextoFazer.findViewById(R.id.btnAdicionar)
         botaoLupaFazer = contextoFazer.findViewById(R.id.btnLupaFazer)
@@ -55,9 +39,17 @@ class FazerFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+
         imagemFazerVazia = view.findViewById(R.id.imgFazerVazia)
         textoFazerVazia = view.findViewById(R.id.txtFazerVazia)
         segundoTextoFazerVazia = view.findViewById(R.id.txt2FazerVazia)
+
+
+        if(listaTarefasFazer.isNotEmpty()){
+            imagemFazerVazia.visibility = View.GONE
+            textoFazerVazia.visibility = View.GONE
+            segundoTextoFazerVazia.visibility = View.GONE
+        }
 
 
         val botao = view.findViewById<Button>(R.id.btnAdicionar)

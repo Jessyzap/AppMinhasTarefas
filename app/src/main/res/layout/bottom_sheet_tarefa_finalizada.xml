@@ -42,7 +42,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="40dp"
-                android:text="Estudar bastante POO!!!"
+                android:text="@string/titulo_feita"
                 android:textStyle="bold"
                 android:textSize="20sp"/>
 
@@ -50,7 +50,7 @@
                 android:textColor="#8F8F8F"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Feita"
+                android:text="@string/feita"
                 android:layout_marginTop="70dp"
                 android:textSize="16sp"/>
     </FrameLayout>
@@ -58,8 +58,8 @@
     <TextView
             android:id="@+id/txtDescricaoExcluir"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:text="Preciso estudar alguns conceitos como herança........."
+            android:layout_height="150dp"
+            android:text="@string/descricao_feita"
             android:maxLines="20"
             android:textSize="16sp"
             android:backgroundTint="#ECECEC"
@@ -78,7 +78,7 @@
                 android:gravity="center_horizontal">
 
             <ImageView
-                    android:layout_marginTop="295dp"
+                    android:layout_marginTop="119dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_excluir"/>
@@ -87,13 +87,13 @@
                     android:id="@+id/btnExcluirTarefa"
                     android:textSize="16sp"
                     android:layout_marginStart="10dp"
-                    android:layout_marginTop="292dp"
+                    android:layout_marginTop="116dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:clickable="true"
                     android:textStyle="bold"
                     android:textColor="#D14793"
-                    android:text="Excluir tarefa"
+                    android:text="@string/excluir_tarefa_feita"
                     android:focusable="true"/>
         </LinearLayout>
 

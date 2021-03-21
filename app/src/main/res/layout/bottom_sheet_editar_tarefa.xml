@@ -41,7 +41,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="40dp"
-                android:text="Editar Tarefa"
+                android:text="@string/editar_tarefa"
                 android:layout_marginStart="78dp"
                 android:textStyle="bold"
                 android:textSize="20sp"/>
@@ -51,7 +51,7 @@
                 android:layout_width="wrap_content"
                 android:layout_marginStart="78dp"
                 android:layout_height="wrap_content"
-                android:text="Altere  uma tarefa existente"
+                android:text="@string/altere_uma_tarefa_existente"
                 android:layout_marginTop="70dp"
                 android:textSize="16sp"/>
     </FrameLayout>
@@ -63,7 +63,7 @@
             android:maxLength="25"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:hint="Título da tarefa"
+            android:hint="@string/titulo_da_tarefa_editar"
             android:textSize="16sp"
             android:background="@drawable/shape_retangular"
             android:backgroundTint="#ECECEC"
@@ -72,11 +72,11 @@
     <EditText
             android:id="@+id/edtDescricaoEditar"
             android:paddingBottom="105dp"
-            android:inputType="textCapSentences"
+            android:inputType="textMultiLine|textCapSentences"
             android:paddingStart="10dp"
             android:layout_width="match_parent"
             android:layout_height="150dp"
-            android:hint="Descrição da tarefa"
+            android:hint="@string/descricao_da_tarefa_editar"
             android:textSize="16sp"
             android:maxLines="20"
             android:background="@drawable/shape_retangular"
@@ -86,7 +86,7 @@
             android:textColor="@color/colorDescricao"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="opcional"
+            android:text="@string/opcional_editar"
             android:textSize="12sp"
             android:layout_marginTop="5dp"/>
 
@@ -98,7 +98,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/shape_button_bottom_sheet"
-            android:text="Salvar"/>
+            android:text="@string/salvar"/>
 
     <ImageView
             android:layout_width="100dp"

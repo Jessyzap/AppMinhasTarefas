@@ -1,4 +1,4 @@
-package com.ctt.minhastarefas.ui
+package com.ctt.minhastarefas.ui.activity
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity

@@ -1,4 +1,4 @@
-package com.ctt.minhastarefas.bottomSheets
+package com.ctt.minhastarefas.ui.bottomSheets
 
 import android.app.Dialog
 import android.os.Bundle
@@ -10,14 +10,13 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.fragment.app.FragmentTransaction
 import com.ctt.minhastarefas.R
-import com.ctt.minhastarefas.adapterListas.TarefasProgressoAdapter
-import com.ctt.minhastarefas.fragments.ProgressoFragment
-import com.ctt.minhastarefas.fragments.ProgressoFragment.Companion.listaTarefasProgresso
+import com.ctt.minhastarefas.adapterListas.TarefasFeitasAdapter
+import com.ctt.minhastarefas.ui.fragments.FeitasFragment
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
-class EditarProgressoBottomSheet() : BottomSheetDialogFragment() {
+class EditarFeitaBottomSheet() : BottomSheetDialogFragment() {
 
     private lateinit var botaoSalvar: Button
 
@@ -28,9 +27,9 @@ class EditarProgressoBottomSheet() : BottomSheetDialogFragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
-        val contextoFinalizar = inflater.inflate(R.layout.bottom_sheet_editar_tarefa, container, false)
-        botaoSalvar = contextoFinalizar.findViewById(R.id.btnSalvarEditar)
-        return contextoFinalizar
+        val contextoFinalizada = inflater.inflate(R.layout.bottom_sheet_editar_tarefa, container, false)
+        botaoSalvar = contextoFinalizada.findViewById(R.id.btnSalvarEditar)
+        return contextoFinalizada
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -50,12 +49,12 @@ class EditarProgressoBottomSheet() : BottomSheetDialogFragment() {
 
 
         botaoSalvar.setOnClickListener {
-            context?.let { it1 -> TarefasProgressoAdapter(listaTarefasProgresso, it1) }?.substituirTarefaProgresso(
+            context?.let { it1 -> TarefasFeitasAdapter(FeitasFragment.listaTarefasFeitas, it1) }?.substituirTarefaFeita(
                 tituloTarefa.text.toString(), descricaoTarefa.text.toString(), posicaoTarefaRecebida.toString()
             )
 
             val transicao: FragmentTransaction = getFragmentManager()!!.beginTransaction()
-            transicao.replace(R.id.frProgresso, ProgressoFragment())
+            transicao.replace(R.id.frFeitas, FeitasFragment())
             transicao.commit()
 
             Toast.makeText(context, "A tarefa foi alterada", Toast.LENGTH_LONG).show()

@@ -1,4 +1,4 @@
-package com.ctt.minhastarefas.bottomSheets
+package com.ctt.minhastarefas.ui.bottomSheets
 
 import android.app.Dialog
 import android.os.Bundle
@@ -10,14 +10,14 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.fragment.app.FragmentTransaction
 import com.ctt.minhastarefas.R
-import com.ctt.minhastarefas.adapterListas.TarefasFazerAdapter
-import com.ctt.minhastarefas.fragments.FazerFragment
-import com.ctt.minhastarefas.fragments.FazerFragment.Companion.listaTarefasFazer
+import com.ctt.minhastarefas.adapterListas.TarefasProgressoAdapter
+import com.ctt.minhastarefas.ui.fragments.ProgressoFragment
+import com.ctt.minhastarefas.ui.fragments.ProgressoFragment.Companion.listaTarefasProgresso
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
-class EditarFazerBottomSheet() : BottomSheetDialogFragment() {
+class EditarProgressoBottomSheet() : BottomSheetDialogFragment() {
 
     private lateinit var botaoSalvar: Button
 
@@ -28,9 +28,9 @@ class EditarFazerBottomSheet() : BottomSheetDialogFragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
-        val contextoIniciar = inflater.inflate(R.layout.bottom_sheet_editar_tarefa, container, false)
-        botaoSalvar = contextoIniciar.findViewById(R.id.btnSalvarEditar)
-        return contextoIniciar
+        val contextoFinalizar = inflater.inflate(R.layout.bottom_sheet_editar_tarefa, container, false)
+        botaoSalvar = contextoFinalizar.findViewById(R.id.btnSalvarEditar)
+        return contextoFinalizar
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -49,27 +49,26 @@ class EditarFazerBottomSheet() : BottomSheetDialogFragment() {
         descricaoTarefa.setText(descricaoTarefaRecebida)
 
 
-        // Salvar as alterações
         botaoSalvar.setOnClickListener {
-            context?.let { it1 -> TarefasFazerAdapter(listaTarefasFazer, it1) }?.substituirTarefaFazer(
-                tituloTarefa.text.toString(),descricaoTarefa.text.toString(),posicaoTarefaRecebida.toString()
+            context?.let { it1 -> TarefasProgressoAdapter(listaTarefasProgresso, it1) }?.substituirTarefaProgresso(
+                tituloTarefa.text.toString(), descricaoTarefa.text.toString(), posicaoTarefaRecebida.toString()
             )
 
-            val transicaoFazer: FragmentTransaction = getFragmentManager()!!.beginTransaction()
-            transicaoFazer.replace(R.id.frFazer, FazerFragment())
-            transicaoFazer.commit()
+            val transicao: FragmentTransaction = getFragmentManager()!!.beginTransaction()
+            transicao.replace(R.id.frProgresso, ProgressoFragment())
+            transicao.commit()
 
             Toast.makeText(context, "A tarefa foi alterada", Toast.LENGTH_LONG).show()
             dismiss()
         }
     }
 
-
     override fun onStart() {
         super.onStart()
         val sheetContainer = requireView().parent as? ViewGroup ?: return
         sheetContainer.layoutParams.height = ViewGroup.LayoutParams.MATCH_PARENT
     }
+
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         return BottomSheetDialog(requireContext(), theme).apply {
             behavior.state = BottomSheetBehavior.STATE_HALF_EXPANDED

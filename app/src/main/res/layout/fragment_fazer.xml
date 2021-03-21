@@ -8,7 +8,7 @@
         android:layout_height="match_parent"
         android:layout_gravity="center_horizontal"
         android:id="@+id/frFazer"
-        tools:context=".fragments.FazerFragment">
+        tools:context=".ui.fragments.FazerFragment">
 
     <androidx.recyclerview.widget.RecyclerView
             android:layout_marginTop="114dp"

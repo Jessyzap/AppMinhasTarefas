@@ -9,34 +9,12 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
-        <activity android:name=".ui.TesteActivity">
+        <activity android:name=".ui.activity.PrincipalActivity">
         </activity>
-        <activity android:name=".bottomSheets.EditarFazerBottomSheet">
-        </activity>
-        <activity android:name=".bottomSheets.MainActivity">
-        </activity>
-        <activity android:name=".bottomSheets.TesteActivity">
-        </activity>
-        <activity android:name=".ui.PrincipalActivity">
-        </activity>
-        <activity android:name=".CarregandoTarefasFazerActivity">
-        </activity>
-        <activity android:name=".TarefasFeitasVaziaActivity">
-        </activity>
-        <activity android:name=".TarefasFazerVaziaActivity">
-        </activity>
-        <activity android:name=".TarefasCategoriaActivity">
-        </activity>
-        <activity android:name=".TarefasFeitasActivity">
-        </activity>
-        <activity android:name=".TarefasProgressoActivity">
-        </activity>
-        <activity android:name=".TarefasFazerActivity">
-        </activity>
-        <activity android:name=".ui.SaidaActivity">
+        <activity android:name=".ui.activity.SaidaActivity">
         </activity>
         <activity
-                android:name=".ui.Splash"
+                android:name=".ui.activity.Splash"
                 android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>

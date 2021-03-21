@@ -20,7 +20,7 @@
             android:textColor="@color/colorTitulo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Pesquise por tarefas a fazer"
+            android:text="@string/pesquise_por_tarefas_a_fazer"
             android:textStyle="bold"
             android:textSize="20sp"
             android:layout_marginTop="40dp"/>
@@ -31,7 +31,7 @@
             android:inputType="textCapSentences"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:hint="Título da tarefa"
+            android:hint="@string/titulo_da_tarefa"
             android:textSize="16sp"
             android:background="@drawable/shape_retangular"
             android:backgroundTint="#ECECEC"
@@ -45,7 +45,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/shape_button_bottom_sheet"
-            android:text="Procurar"/>
+            android:text="@string/procurar"/>
 
     <ImageView
             android:layout_width="100dp"

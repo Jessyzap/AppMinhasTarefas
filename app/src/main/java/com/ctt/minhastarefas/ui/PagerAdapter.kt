@@ -3,9 +3,9 @@ package com.ctt.minhastarefas.ui
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
-import com.ctt.minhastarefas.fragments.FazerFragment
-import com.ctt.minhastarefas.fragments.FeitasFragment
-import com.ctt.minhastarefas.fragments.ProgressoFragment
+import com.ctt.minhastarefas.ui.fragments.FazerFragment
+import com.ctt.minhastarefas.ui.fragments.FeitasFragment
+import com.ctt.minhastarefas.ui.fragments.ProgressoFragment
 
 class PagerAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm) {
 

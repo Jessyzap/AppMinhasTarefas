@@ -9,8 +9,8 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.ctt.minhastarefas.R
-import com.ctt.minhastarefas.bottomSheets.EditarFeitaBottomSheet
-import com.ctt.minhastarefas.bottomSheets.FinalizadaTarefaBottomSheet
+import com.ctt.minhastarefas.ui.bottomSheets.EditarFeitaBottomSheet
+import com.ctt.minhastarefas.ui.bottomSheets.FinalizadaTarefaBottomSheet
 import com.ctt.minhastarefas.model.Tarefa
 
 class TarefasFeitasAdapter(private val listaTarefasFeitas: MutableList<Tarefa>, private val contexto: Context) :
