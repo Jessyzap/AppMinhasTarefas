@@ -1,103 +1,73 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
-        android:theme="@style/Theme.MaterialComponents"
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_gravity="center_horizontal"
-        android:id="@+id/frFazer"
-        tools:context=".ui.fragments.FazerFragment">
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/frFazer"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center_horizontal"
+    android:theme="@style/Theme.MaterialComponents"
+    tools:context=".ui.fragments.FazerFragment">
 
     <androidx.recyclerview.widget.RecyclerView
-            android:layout_marginTop="114dp"
-            android:background="#ECECEC"
-            android:id="@+id/rvListaFazer"
-            android:layout_height="617dp"
-            android:layout_width="match_parent"
-            tools:listitem="@layout/item_tarefas_fazer"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"/>
-    <!--
-    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
-            android:id="@+id/btnAdicionar"
-            android:textSize="15sp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="500dp"
-            android:layout_marginEnd="40dp"
-            android:layout_gravity="end"
-            android:text="Adicionar"
-            android:textColor="#FFFFFF"
-            app:iconTint="#FFFFFF"
-            app:iconSize="18dp"
-            android:backgroundTint="@color/colorBotao"
-            app:icon="@drawable/ic_adicionar"/>
-            -->
+        android:id="@+id/rvListaFazer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:background="#ECECEC"
+        android:orientation="vertical"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:listitem="@layout/item_tarefas_fazer" />
 
     <ImageView
-            android:id="@+id/imgFazerVazia"
-            android:contentDescription="@string/imagemlistavazia"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="220dp"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:src="@drawable/ic_visionary"/>
-    <TextView
-            android:id="@+id/txtFazerVazia"
-            android:layout_gravity="center_horizontal"
-            android:textSize="18sp"
-            android:layout_marginTop="370dp"
-            android:textColor="@color/colorTitulo"
-            android:text="@string/opa_nao_ha_nada_aqui_fazer"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-    <TextView
-            android:id="@+id/txt2FazerVazia"
-            android:layout_gravity="center_horizontal"
-            android:textSize="14sp"
-            android:layout_marginTop="395dp"
-            android:textColor="@color/colorTitulo"
-            android:text="@string/que_tal_adicionar_alguma_tarefa_na_sua_lista"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-    <Button
-            android:id="@+id/btnAdicionar"
-            android:layout_height="70dp"
-            android:layout_width="70dp"
-            android:background="@drawable/ic_mais"
-            android:layout_marginStart="120dp"
-            android:layout_marginTop="490dp"
-            android:layout_gravity="center_horizontal"/>
-    <Button
-            android:id="@+id/btnLupaFazer"
-            android:layout_height="57dp"
-            android:layout_width="57dp"
-            android:layout_marginStart="120dp"
-            android:background="@drawable/ic_lupabuttonm"
-            android:layout_marginTop="420dp"
-            android:layout_gravity="center_horizontal"/>
+        android:id="@+id/imgFazerVazia"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="220dp"
+        android:contentDescription="@string/imagemlistavazia"
+        android:src="@drawable/ic_visionary" />
 
-    <!--
-    <androidx.coordinatorlayout.widget.CoordinatorLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    <TextView
+        android:id="@+id/txtFazerVazia"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="370dp"
+        android:text="@string/opa_nao_ha_nada_aqui_fazer"
+        android:textColor="@color/colorTitulo"
+        android:textSize="18sp" />
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/btnAdicionarr"
-            android:theme="@style/Theme.MaterialComponents"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom|right"
-            android:layout_margin="16dp"
-            android:contentDescription="botão"
-            app:srcCompat="@drawable/ic_adicionar"
-            android:background="@color/colorBotao"
-            app:tint="@color/colorBotao"/>
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
--->
+    <TextView
+        android:id="@+id/txt2FazerVazia"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="395dp"
+        android:text="@string/que_tal_adicionar_alguma_tarefa_na_sua_lista"
+        android:textColor="@color/colorTitulo"
+        android:textSize="14sp" />
+
+    <Button
+        android:id="@+id/btnAdicionar"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginStart="120dp"
+        android:layout_marginTop="490dp"
+        android:background="@drawable/ic_mais" />
+
+    <Button
+        android:id="@+id/btnLupaFazer"
+        android:layout_width="57dp"
+        android:layout_height="57dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginStart="120dp"
+        android:layout_marginTop="420dp"
+        android:background="@drawable/ic_lupabuttonm" />
 
 </FrameLayout>
