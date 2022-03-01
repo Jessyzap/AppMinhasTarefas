@@ -7,71 +7,66 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.ctt.minhastarefas.R
-import com.ctt.minhastarefas.ui.bottomSheets.EditarFazerBottomSheet
+import com.ctt.minhastarefas.model.TarefaAFazer
 import com.ctt.minhastarefas.ui.bottomSheets.VisualizarTarefaBottomSheet
-import com.ctt.minhastarefas.model.Tarefa
 
-class TarefasFazerAdapter(private val listaTarefasFazer: MutableList<Tarefa>, private val contexto: Context) :
-    RecyclerView.Adapter<TarefasFazerAdapter.TarefaHolder>() {
+class TarefasFazerAdapter(val context: Context?) :
+    ListAdapter<TarefaAFazer, TarefasFazerAdapter.TarefaViewHolder>(TASKS_COMPARATOR) {
 
-
-    class TarefaHolder(view: View) : RecyclerView.ViewHolder(view) {
-
-        val nome: TextView = view.findViewById(R.id.txtTarefaFazer)
-        val descricao: TextView = view.findViewById(R.id.txtDescricaoTarefaFazer)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TarefaViewHolder {
+        return TarefaViewHolder.create(parent)
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TarefaHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_tarefas_fazer, parent, false)
-        return TarefaHolder(view)
+    override fun onBindViewHolder(holder: TarefaViewHolder, position: Int) {
+        val current = getItem(position)
+        holder.bind(current, position, context)
     }
 
-    override fun onBindViewHolder(holder: TarefaHolder, position: Int) {
+    class TarefaViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        private val nomeDaTarefa: TextView = itemView.findViewById(R.id.txtTarefaFazer)
+        private val descricaoDaTarefa: TextView =
+            itemView.findViewById(R.id.txtDescricaoTarefaFazer)
 
-        holder.nome.text = listaTarefasFazer[position].nomeTarefa
-        holder.descricao.text = listaTarefasFazer[position].descricaoTarefa
-        holder.itemView.setOnClickListener {
+        fun bind(tarefa: TarefaAFazer, posicao: Int, context: Context?) {
+            nomeDaTarefa.text = tarefa.nomeTarefa
+            descricaoDaTarefa.text = tarefa.descricaoTarefa
+            itemView.setOnClickListener {
+                val bottomSheetVisualizar = VisualizarTarefaBottomSheet()
+                val bundle = Bundle()
+                bundle.putString("TITULO", tarefa.nomeTarefa)
+                bundle.putString("DESCRICAO", tarefa.descricaoTarefa)
+                bundle.putInt("POSICAO", posicao)
+                bundle.putInt("ID", tarefa.id)
+                bottomSheetVisualizar.arguments = bundle
+                bottomSheetVisualizar.show(
+                    (context as AppCompatActivity).supportFragmentManager,
+                    ""
+                )
+            }
+        }
 
-            val bottomSheetVisualizar = VisualizarTarefaBottomSheet()
-            val bundle = Bundle()
-            bundle.putString("TITULO", listaTarefasFazer[position].nomeTarefa)
-            bundle.putString("DESCRICAO", listaTarefasFazer[position].descricaoTarefa)
-            bundle.putString("POSICAO", position.toString())
-            bottomSheetVisualizar.setArguments(bundle)
-            bottomSheetVisualizar.show((contexto as AppCompatActivity).supportFragmentManager,"BottomSheetVisualizar")
+        companion object {
+            fun create(parent: ViewGroup): TarefaViewHolder {
+                val view: View = LayoutInflater.from(parent.context)
+                    .inflate(R.layout.item_tarefas_fazer, parent, false)
+                return TarefaViewHolder(view)
+            }
         }
     }
 
-    override fun getItemCount(): Int = listaTarefasFazer.size
+    companion object {
+        private val TASKS_COMPARATOR = object : DiffUtil.ItemCallback<TarefaAFazer>() {
+            override fun areItemsTheSame(oldItem: TarefaAFazer, newItem: TarefaAFazer): Boolean {
+                return oldItem === newItem
+            }
 
-
-    fun editarTarefaFazer(titulo: String, descricao: String,posicao: Int){
-
-        val bottomSheetEditar = EditarFazerBottomSheet()
-        val bundle = Bundle()
-        bundle.putString("TITULO", titulo)
-        bundle.putString("DESCRICAO", descricao)
-        bundle.putString("POSICAO", posicao.toString())
-        bottomSheetEditar.setArguments(bundle)
-        bottomSheetEditar.show((contexto as AppCompatActivity).supportFragmentManager,"")
-    }
-
-    fun substituirTarefaFazer(tituloFazer: String, descricaoFazer: String, posicaoFazer: String) {
-
-        listaTarefasFazer.set(posicaoFazer.toInt(),Tarefa(tituloFazer,descricaoFazer))
-        notifyDataSetChanged()
-    }
-
-    fun adicionarTarefaFazer(tarefa: Tarefa) {
-        listaTarefasFazer.add(tarefa)
-        notifyDataSetChanged()
-    }
-
-    fun removerTarefaFazer(position: Int) {
-
-        listaTarefasFazer.removeAt(position)
-        notifyDataSetChanged()
+            override fun areContentsTheSame(oldItem: TarefaAFazer, newItem: TarefaAFazer): Boolean {
+                return oldItem.id == newItem.id
+            }
+        }
     }
 }
