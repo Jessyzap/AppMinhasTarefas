@@ -7,69 +7,72 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.ctt.minhastarefas.R
-import com.ctt.minhastarefas.ui.bottomSheets.EditarProgressoBottomSheet
+import com.ctt.minhastarefas.model.TarefaEmProgresso
 import com.ctt.minhastarefas.ui.bottomSheets.FinalizarTarefaBottomSheet
-import com.ctt.minhastarefas.model.Tarefa
 
-class TarefasProgressoAdapter(private val listaTarefasProgresso: MutableList<Tarefa>, private val contexto: Context) :
-    RecyclerView.Adapter<TarefasProgressoAdapter.TarefaProgressoHolder>() {
+class TarefasProgressoAdapter(val context: Context?) :
+    ListAdapter<TarefaEmProgresso, TarefasProgressoAdapter.TarefaViewHolder>(TASKS_COMPARATOR) {
 
-
-    class TarefaProgressoHolder(view: View) : RecyclerView.ViewHolder(view) {
-
-        val nome: TextView = view.findViewById(R.id.txtTarefaProgresso)
-        val descricao: TextView = view.findViewById(R.id.txtDescricaoTarefaProgresso)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TarefaViewHolder {
+        return TarefaViewHolder.create(parent)
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TarefaProgressoHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_tarefas_progresso, parent, false)
-        return TarefaProgressoHolder(view)
+    override fun onBindViewHolder(holder: TarefaViewHolder, position: Int) {
+        val current = getItem(position)
+        holder.bind(current, position, context)
     }
 
-    override fun onBindViewHolder(holder: TarefaProgressoHolder, position: Int) {
+    class TarefaViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        private val nomeDaTarefa: TextView = itemView.findViewById(R.id.txtTarefaProgresso)
+        private val descricaoDaTarefa: TextView =
+            itemView.findViewById(R.id.txtDescricaoTarefaProgresso)
 
-        holder.nome.text = listaTarefasProgresso[position].nomeTarefa
-        holder.descricao.text = listaTarefasProgresso[position].descricaoTarefa
-        holder.itemView.setOnClickListener {
+        fun bind(tarefa: TarefaEmProgresso, posicao: Int, context: Context?) {
+            nomeDaTarefa.text = tarefa.nomeTarefa
+            descricaoDaTarefa.text = tarefa.descricaoTarefa
+            itemView.setOnClickListener {
+                val bottomSheetVisualizar = FinalizarTarefaBottomSheet()
+                val bundle = Bundle()
+                bundle.putString("TITULO", tarefa.nomeTarefa)
+                bundle.putString("DESCRICAO", tarefa.descricaoTarefa)
+                bundle.putInt("POSICAO", posicao)
+                bundle.putInt("ID", tarefa.id)
+                bottomSheetVisualizar.arguments = bundle
+                bottomSheetVisualizar.show(
+                    (context as AppCompatActivity).supportFragmentManager,
+                    ""
+                )
+            }
+        }
 
-            val bottomSheetProgresso = FinalizarTarefaBottomSheet()
-            val bundle = Bundle()
-            bundle.putString("TITULO", listaTarefasProgresso[position].nomeTarefa)
-            bundle.putString("DESCRICAO", listaTarefasProgresso[position].descricaoTarefa)
-            bundle.putString("POSICAO", position.toString())
-            bottomSheetProgresso.setArguments(bundle)
-            bottomSheetProgresso.show((contexto as AppCompatActivity).supportFragmentManager, "BottomSheetProgresso")
+        companion object {
+            fun create(parent: ViewGroup): TarefaViewHolder {
+                val view: View = LayoutInflater.from(parent.context)
+                    .inflate(R.layout.item_tarefas_progresso, parent, false)
+                return TarefaViewHolder(view)
+            }
         }
     }
 
-    override fun getItemCount(): Int = listaTarefasProgresso.size
+    companion object {
+        private val TASKS_COMPARATOR = object : DiffUtil.ItemCallback<TarefaEmProgresso>() {
+            override fun areItemsTheSame(
+                oldItem: TarefaEmProgresso,
+                newItem: TarefaEmProgresso
+            ): Boolean {
+                return oldItem === newItem
+            }
 
-
-    fun editarTarefaProgresso(titulo: String, descricao: String,posicao: Int){
-
-        val bottomSheetEditar = EditarProgressoBottomSheet()
-        val bundle = Bundle()
-        bundle.putString("TITULO", titulo)
-        bundle.putString("DESCRICAO", descricao)
-        bundle.putString("POSICAO", posicao.toString())
-        bottomSheetEditar.setArguments(bundle)
-        bottomSheetEditar.show((contexto as AppCompatActivity).supportFragmentManager,"")
-    }
-
-    fun substituirTarefaProgresso(tituloProgresso: String, descricaoProgresso: String, posicaoProgresso: String) {
-        listaTarefasProgresso.set(posicaoProgresso.toInt(),Tarefa(tituloProgresso,descricaoProgresso))
-        notifyDataSetChanged()
-    }
-
-    fun adicionarTarefaProgresso(tarefa: Tarefa) {
-        listaTarefasProgresso.add(tarefa)
-        notifyDataSetChanged()
-    }
-
-    fun removerTarefaProgresso(position: Int) {
-        listaTarefasProgresso.removeAt(position)
-        notifyDataSetChanged()
+            override fun areContentsTheSame(
+                oldItem: TarefaEmProgresso,
+                newItem: TarefaEmProgresso
+            ): Boolean {
+                return oldItem.id == newItem.id
+            }
+        }
     }
 }

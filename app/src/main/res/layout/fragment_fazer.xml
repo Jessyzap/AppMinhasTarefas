@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.swiperefreshlayout.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/frFazer"
@@ -9,65 +9,79 @@
     android:theme="@style/Theme.MaterialComponents"
     tools:context=".ui.fragments.FazerFragment">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvListaFazer"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="5dp"
-        android:background="#ECECEC"
-        android:orientation="vertical"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:listitem="@layout/item_tarefas_fazer" />
+        android:layout_height="match_parent">
 
-    <ImageView
-        android:id="@+id/imgFazerVazia"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="220dp"
-        android:contentDescription="@string/imagemlistavazia"
-        android:src="@drawable/ic_visionary" />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvListaFazer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:background="#ECECEC"
+            android:orientation="vertical"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:listitem="@layout/item_tarefas_fazer" />
 
-    <TextView
-        android:id="@+id/txtFazerVazia"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="370dp"
-        android:text="@string/opa_nao_ha_nada_aqui_fazer"
-        android:textColor="@color/colorTitulo"
-        android:textSize="18sp" />
+        <ImageView
+            android:id="@+id/imgFazerVazia"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="220dp"
+            android:contentDescription="@string/imagemlistavazia"
+            android:src="@drawable/ic_visionary" />
 
-    <TextView
-        android:id="@+id/txt2FazerVazia"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="395dp"
-        android:text="@string/que_tal_adicionar_alguma_tarefa_na_sua_lista"
-        android:textColor="@color/colorTitulo"
-        android:textSize="14sp" />
+        <TextView
+            android:id="@+id/txtFazerVazia"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="370dp"
+            android:text="@string/opa_nao_ha_nada_aqui_fazer"
+            android:textColor="@color/colorTitulo"
+            android:textSize="18sp" />
 
-    <Button
-        android:id="@+id/btnAdicionar"
-        android:layout_width="70dp"
-        android:layout_height="70dp"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginStart="120dp"
-        android:layout_marginTop="490dp"
-        android:background="@drawable/ic_mais" />
+        <TextView
+            android:id="@+id/txt2FazerVazia"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="395dp"
+            android:text="@string/que_tal_adicionar_alguma_tarefa_na_sua_lista"
+            android:textColor="@color/colorTitulo"
+            android:textSize="14sp" />
 
-    <Button
-        android:id="@+id/btnLupaFazer"
-        android:layout_width="57dp"
-        android:layout_height="57dp"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginStart="120dp"
-        android:layout_marginTop="420dp"
-        android:background="@drawable/ic_lupabuttonm" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end">
 
-</FrameLayout>
+            <Button
+                android:id="@+id/btnAdicionar"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_margin="16dp"
+                android:background="@drawable/ic_mais"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+            <Button
+                android:id="@+id/btnLupaFazer"
+                android:layout_width="57dp"
+                android:layout_height="57dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_margin="16dp"
+                android:background="@drawable/ic_lupabuttonm"
+                app:layout_constraintBottom_toTopOf="@id/btnAdicionar"
+                app:layout_constraintEnd_toEndOf="@id/btnAdicionar"
+                app:layout_constraintStart_toStartOf="@id/btnAdicionar" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </FrameLayout>
+</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

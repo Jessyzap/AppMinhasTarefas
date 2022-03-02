@@ -17,7 +17,9 @@ class SaidaActivity : AppCompatActivity() {
 
     fun animacaoFinal() {
         Handler(
-            Looper.getMainLooper()).postDelayed({
+            Looper.getMainLooper()
+        ).postDelayed({
             finish()
-        }, 5000)}
+        }, 5000)
+    }
 }

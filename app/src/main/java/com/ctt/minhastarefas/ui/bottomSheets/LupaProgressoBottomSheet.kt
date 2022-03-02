@@ -9,9 +9,13 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.setFragmentResult
 import com.ctt.minhastarefas.R
-import com.ctt.minhastarefas.ui.fragments.ProgressoFragment.Companion.listaTarefasProgresso
+import com.ctt.minhastarefas.database.TarefaApplication
+import com.ctt.minhastarefas.model.TarefaEmProgresso
+import com.ctt.minhastarefas.ui.viewmodel.TarefaEmProgressoViewModel
+import com.ctt.minhastarefas.ui.viewmodel.TarefaViewModelFactory
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
@@ -21,19 +25,23 @@ class LupaProgressoBottomSheet : BottomSheetDialogFragment() {
     private lateinit var botaoProcurarProgresso: Button
     private lateinit var nomeTarefa: EditText
     private lateinit var tituloProvisorio: TextView
-
-    companion object {
-        const val TAG = "LupaProgressoBottomSheet"
+    private val tarefaViewModel: TarefaEmProgressoViewModel by activityViewModels {
+        TarefaViewModelFactory((requireActivity().application as TarefaApplication).repository)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setStyle(BottomSheetDialogFragment.STYLE_NORMAL, R.style.MyBottomSheetDialogTheme)
+        setStyle(STYLE_NORMAL, R.style.MyBottomSheetDialogTheme)
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
 
-        val contextoPesquisarProgresso = inflater.inflate(R.layout.bottom_sheet_lupa, container, false)
+        val contextoPesquisarProgresso =
+            inflater.inflate(R.layout.bottom_sheet_lupa, container, false)
         botaoProcurarProgresso = contextoPesquisarProgresso.findViewById(R.id.btnProcurar)
         return contextoPesquisarProgresso
     }
@@ -43,61 +51,43 @@ class LupaProgressoBottomSheet : BottomSheetDialogFragment() {
 
         nomeTarefa = view.findViewById(R.id.txtProcurarTituloTarefa)
         tituloProvisorio = view.findViewById(R.id.tituloProvisorio)
-
-        tituloProvisorio.text = "Procurar por tarefas em progresso"
-
+        tituloProvisorio.text = "Pesquise por tarefas em progresso"
 
         botaoProcurarProgresso.setOnClickListener {
 
             val titulo = nomeTarefa.text.toString()
+            var lista = listOf<TarefaEmProgresso>()
+
+            tarefaViewModel.tarefasEmProgresso.observe(viewLifecycleOwner) { tarefas ->
+                lista = tarefas
+            }
+
+            val listaTemporaria = lista.filter {
+                it.nomeTarefa.contains(titulo)
+            }
+
+            tarefaViewModel.popularListaPesquisa(listaTemporaria)
+            val bundle = Bundle()
+            bundle.putBoolean("pesquisa", listaTemporaria.isNotEmpty())
+            setFragmentResult("pesquisaProgresso", bundle)
 
             when {
-                titulo == "" -> {
-                    nomeTarefa.error = "Insira um título para pesquisar"
-                }
-                listaTarefasProgresso.isEmpty() -> {
-                    Toast.makeText(context, "A sua lista está vazia!", Toast.LENGTH_SHORT).show()
-                }
-                listaTarefasProgresso.isNotEmpty() -> {
-                    for (tarefa in listaTarefasProgresso) {
-
-                        if (titulo in tarefa.nomeTarefa) {
-
-                            val indice = listaTarefasProgresso.indexOf(tarefa)
-
-                            // abrir bottom sheet
-                            val bottomSheetFinalizar = FinalizarTarefaBottomSheet()
-                            val bundle = Bundle()
-                            bundle.putString("TITULO", tarefa.nomeTarefa)
-                            bundle.putString("DESCRICAO", tarefa.descricaoTarefa)
-                            bundle.putString("POSICAO", indice.toString())
-                            bottomSheetFinalizar.setArguments(bundle)
-                            bottomSheetFinalizar.show(
-                                (context as AppCompatActivity).supportFragmentManager,
-                                "BottomSheetFinalizar"
-                            )
-                            nomeTarefa.text.clear()
-                            dismiss()
-                        } else {
-                            Toast.makeText(context, "Essa tarefa não está na lista!", Toast.LENGTH_SHORT).show()
-
-                        }
-                    }
-                }
+                titulo.isEmpty() -> nomeTarefa.error = "Insira um título para pesquisar"
+                listaTemporaria.isEmpty() -> Toast.makeText(
+                    context,
+                    "Essa tarefa não está na lista!",
+                    Toast.LENGTH_SHORT
+                ).show()
             }
+            dismiss()
         }
-    }
-
-    override fun onStart() {
-        super.onStart()
-        val sheetContainer = requireView().parent as? ViewGroup ?: return
-        sheetContainer.layoutParams.height = ViewGroup.LayoutParams.MATCH_PARENT
     }
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         return BottomSheetDialog(requireContext(), theme).apply {
             behavior.state = BottomSheetBehavior.STATE_HALF_EXPANDED
-            behavior.halfExpandedRatio = 0.55F
+            behavior.halfExpandedRatio = 0.50F
         }
     }
+
 }

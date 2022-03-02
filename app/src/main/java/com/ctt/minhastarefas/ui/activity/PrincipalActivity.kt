@@ -23,12 +23,11 @@ class PrincipalActivity : AppCompatActivity() {
         tabLayout.setupWithViewPager(viewPager)
     }
 
-    // animacao
-    override fun onPause(){
+    override fun onStop() {
         super.onStop()
-
         val saida = Intent(this, SaidaActivity::class.java)
         startActivity(saida)
         finish()
     }
+
 }

@@ -1,10 +1,10 @@
 package com.ctt.minhastarefas.ui.activity
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import androidx.appcompat.app.AppCompatActivity
 import com.ctt.minhastarefas.R
 
 class Splash : AppCompatActivity() {
@@ -15,12 +15,14 @@ class Splash : AppCompatActivity() {
         animacao()
     }
 
-    fun animacao() {
+    private fun animacao() {
         Handler(
-            Looper.getMainLooper()).postDelayed({
+            Looper.getMainLooper()
+        ).postDelayed({
             val proximaTela =
                 Intent(this, PrincipalActivity::class.java)
             startActivity(proximaTela)
             finish()
-        }, 3000)}
+        }, 3000)
+    }
 }

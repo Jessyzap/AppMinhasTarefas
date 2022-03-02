@@ -1,4 +1,4 @@
-package com.ctt.minhastarefas
+package com.ctt.minhastarefas.database
 
 import android.content.Context
 import androidx.room.Database

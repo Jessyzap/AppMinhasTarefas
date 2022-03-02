@@ -7,14 +7,23 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.setFragmentResultListener
 import androidx.recyclerview.widget.RecyclerView
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.ctt.minhastarefas.R
 import com.ctt.minhastarefas.adapterListas.TarefasFazerAdapter
+import com.ctt.minhastarefas.database.TarefaApplication
+import com.ctt.minhastarefas.esconderPlaceHolder
+import com.ctt.minhastarefas.model.TarefaAFazer
+import com.ctt.minhastarefas.model.TarefaEmProgresso
+import com.ctt.minhastarefas.mostrarPlaceHolder
 import com.ctt.minhastarefas.ui.bottomSheets.CriarTarefaBottomSheet
 import com.ctt.minhastarefas.ui.bottomSheets.LupaFazerBottomSheet
-import com.ctt.minhastarefas.model.Tarefa
+import com.ctt.minhastarefas.ui.viewmodel.TarefaViewModel
+import com.ctt.minhastarefas.ui.viewmodel.TarefaViewModelFactory
 
 class FazerFragment : Fragment() {
 
@@ -23,7 +32,11 @@ class FazerFragment : Fragment() {
     private lateinit var segundoTextoFazerVazia: TextView
     private lateinit var botao: Button
     private lateinit var botaoLupaFazer: Button
-
+    private lateinit var adapterTarefasFazer: TarefasFazerAdapter
+    var listaTarefasFazer = mutableListOf<TarefaAFazer>()
+    private val tarefaViewModel: TarefaViewModel by activityViewModels {
+        TarefaViewModelFactory((requireActivity().application as TarefaApplication).repository)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -38,53 +51,135 @@ class FazerFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        swipe()
+        recyclerConfig()
+        listenerPesquisa()
+        listener()
+        botoes()
+    }
 
+    private fun listenerPesquisa() {
+        setFragmentResultListener("pesquisaFazer") { _, bundle ->
+            val pesquisa = bundle.get("pesquisa")
 
-        imagemFazerVazia = view.findViewById(R.id.imgFazerVazia)
-        textoFazerVazia = view.findViewById(R.id.txtFazerVazia)
-        segundoTextoFazerVazia = view.findViewById(R.id.txt2FazerVazia)
-
-
-        if(listaTarefasFazer.isNotEmpty()){
-            imagemFazerVazia.visibility = View.GONE
-            textoFazerVazia.visibility = View.GONE
-            segundoTextoFazerVazia.visibility = View.GONE
+            pesquisa?.let {
+                if (it == true) {
+                    var lista = listOf<TarefaAFazer>()
+                    tarefaViewModel.listaPesquisa.observe(viewLifecycleOwner) { listaPesquisa ->
+                        lista = listaPesquisa
+                    }
+                    adapterTarefasFazer.submitList(lista)
+                    placeholder()
+                }
+                bundle.clear()
+            }
         }
+    }
 
+    private fun swipe() {
+        val swipe = view?.findViewById<SwipeRefreshLayout>(R.id.frFazer)
+        swipe?.setOnRefreshListener {
+            observador()
+            swipe.isRefreshing = false
+        }
+    }
 
-        val botao = view.findViewById<Button>(R.id.btnAdicionar)
+    private fun recyclerConfig() {
+        val rvFazer = view?.findViewById<RecyclerView>(R.id.rvListaFazer)
+        adapterTarefasFazer = TarefasFazerAdapter(context)
+        rvFazer?.adapter = adapterTarefasFazer
+        observador()
+    }
 
-
+    private fun botoes() {
+        val botao = view?.findViewById<Button>(R.id.btnAdicionar)
         val bottomSheetCriar = CriarTarefaBottomSheet()
         val bottomSheetLupaFazer = LupaFazerBottomSheet()
 
-
-        // Abrir bottom sheet para criar a tarefa
-        botao.setOnClickListener {
-            fragmentManager?.let { it1 ->
-                bottomSheetCriar.show(it1, "CriarTarefaBottomSheet")
+        botao?.setOnClickListener {
+            activity?.supportFragmentManager?.let {
+                bottomSheetCriar.show(it, "")
             }
         }
 
-
-        // Pesquisar por tarefas a fazer
         botaoLupaFazer.setOnClickListener {
-            fragmentManager?.let { it1 ->
-                bottomSheetLupaFazer.show(it1, "LupaFazerBottomSheet")
+            activity?.supportFragmentManager?.let {
+                bottomSheetLupaFazer.show(it, "")
             }
         }
-
-        val rvFazer = view.findViewById<RecyclerView>(R.id.rvListaFazer)
-        val adapterTarefasFazer = TarefasFazerAdapter(listaTarefasFazer, activity!!)
-        rvFazer.adapter = adapterTarefasFazer
-        rvFazer.layoutManager = LinearLayoutManager(context)
     }
 
-    companion object {
-        val listaTarefasFazer = mutableListOf<Tarefa>()
+    private fun placeholder() {
+        view?.let {
+            imagemFazerVazia = it.findViewById(R.id.imgFazerVazia)
+            textoFazerVazia = it.findViewById(R.id.txtFazerVazia)
+            segundoTextoFazerVazia = it.findViewById(R.id.txt2FazerVazia)
+
+            if (listaTarefasFazer.isNotEmpty())
+                esconderPlaceHolder(
+                    imagemFazerVazia,
+                    textoFazerVazia,
+                    segundoTextoFazerVazia
+                )
+            else
+                mostrarPlaceHolder(
+                    imagemFazerVazia,
+                    textoFazerVazia,
+                    segundoTextoFazerVazia
+                )
+        }
     }
+
+    private fun listener() {
+        setFragmentResultListener("tarefaFazer") { _, bundle ->
+            val insert = bundle.get("tarefaCriar")
+            val edit = bundle.get("tarefaAfazerEditar")
+            val remove = bundle.get("tarefaFazerRemover")
+            val move = bundle.get("tarefaFazerMover")
+
+            insert?.let {
+                tarefaViewModel.insert(insert as TarefaAFazer)
+                Toast.makeText(context, "Tarefa cadastrada!", Toast.LENGTH_SHORT).show()
+                bundle.clear()
+            }
+
+            edit?.let {
+                tarefaViewModel.update(edit as TarefaAFazer)
+                Toast.makeText(context, "A tarefa foi alterada", Toast.LENGTH_LONG).show()
+                bundle.clear()
+            }
+
+            remove?.let {
+                tarefaViewModel.remove((remove as TarefaAFazer).id)
+                Toast.makeText(context, "A tarefa foi excluída", Toast.LENGTH_SHORT).show()
+                bundle.clear()
+            }
+
+            move?.let {
+                val tarefa = move as TarefaAFazer
+
+                tarefaViewModel.insertInProgress(
+                    TarefaEmProgresso(
+                        tarefa.id,
+                        tarefa.nomeTarefa,
+                        tarefa.descricaoTarefa
+                    )
+                )
+                Toast.makeText(context, "A tarefa foi iniciada", Toast.LENGTH_SHORT).show()
+                tarefaViewModel.remove((tarefa).id)
+                bundle.clear()
+            }
+        }
+    }
+
+    private fun observador() {
+        tarefaViewModel.tarefasAfazer.observe(viewLifecycleOwner) { tarefas ->
+            tarefas?.let {
+                listaTarefasFazer = tarefas.toMutableList()
+                adapterTarefasFazer.submitList(listaTarefasFazer)
+                placeholder()
+            }
+        }
+    }
+
 }
-
-
-
-

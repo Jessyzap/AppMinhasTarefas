@@ -1,8 +1,9 @@
-package com.ctt.minhastarefas
+package com.ctt.minhastarefas.ui.viewmodel
 
 import androidx.lifecycle.*
 import com.ctt.minhastarefas.model.TarefaAFazer
 import com.ctt.minhastarefas.model.TarefaEmProgresso
+import com.ctt.minhastarefas.repository.Repository
 import kotlinx.coroutines.launch
 
 class TarefaViewModel(
@@ -10,6 +11,14 @@ class TarefaViewModel(
 ) : ViewModel() {
 
     val tarefasAfazer: LiveData<List<TarefaAFazer>> = repository.tarefasAfazer.asLiveData()
+
+    private val _listaPesquisa = MutableLiveData<List<TarefaAFazer>>()
+    val listaPesquisa: MutableLiveData<List<TarefaAFazer>>
+        get() = _listaPesquisa
+
+    fun popularListaPesquisa(listaPesquisa: List<TarefaAFazer>) {
+        _listaPesquisa.value = listaPesquisa
+    }
 
     fun insert(tarefa: TarefaAFazer) = viewModelScope.launch {
         repository.insert(tarefa)
