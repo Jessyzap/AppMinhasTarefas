@@ -22,7 +22,8 @@ class TarefaAFazer(
 @Parcelize
 @Entity(tableName = "doing_table")
 class TarefaEmProgresso(
-    @PrimaryKey(autoGenerate = true) val id: Int = 2,
+    @PrimaryKey(autoGenerate = true)
+    val id: Int = 0,
 
     @ColumnInfo(name = "doing_name")
     var nomeTarefa: String,
@@ -34,7 +35,8 @@ class TarefaEmProgresso(
 @Parcelize
 @Entity(tableName = "done_table")
 class TarefaFeita(
-    @PrimaryKey(autoGenerate = true) val id: Int = 3,
+    @PrimaryKey(autoGenerate = true)
+    val id: Int = 0,
 
     @ColumnInfo(name = "done")
     var nomeTarefa: String,

@@ -4,11 +4,6 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
-import kotlin.random.Random
-
-fun Fragment.randomId(): Int {
-    return Random.nextInt(0, 1000000000)
-}
 
 fun Fragment.esconderPlaceHolder(
     imagem: ImageView,

@@ -10,7 +10,6 @@ import androidx.core.os.bundleOf
 import androidx.fragment.app.setFragmentResult
 import com.ctt.minhastarefas.R
 import com.ctt.minhastarefas.model.TarefaAFazer
-import com.ctt.minhastarefas.randomId
 
 class CriarTarefaBottomSheet : BaseBottomSheetDialogFragment() {
 
@@ -52,7 +51,6 @@ class CriarTarefaBottomSheet : BaseBottomSheetDialogFragment() {
 
                 adicionarTarefaResult(
                     TarefaAFazer(
-                        id = randomId(),
                         nomeTarefa = titulo,
                         descricaoTarefa = descricao
                     )
